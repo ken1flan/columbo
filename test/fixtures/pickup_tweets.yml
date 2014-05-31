@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  attrs: MyText
+  tweet_id: MyString
+  text: MyString
+  truncated: false
+  tweet_at: 2014-05-31 12:47:59
+  tweet_user_name: MyString
+  tweet_user_screen_name: MyString
+
+two:
+  attrs: MyText
+  tweet_id: MyString
+  text: MyString
+  truncated: false
+  tweet_at: 2014-05-31 12:47:59
+  tweet_user_name: MyString
+  tweet_user_screen_name: MyString
