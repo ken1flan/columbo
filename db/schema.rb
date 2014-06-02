@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140531034759) do
     t.string   "text"
     t.boolean  "truncated"
     t.datetime "tweet_at"
+    t.string   "tweet_user_image_url"
     t.string   "tweet_user_name"
     t.string   "tweet_user_screen_name"
     t.datetime "created_at"

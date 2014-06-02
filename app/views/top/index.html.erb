@@ -1,3 +1,19 @@
-<% @pickup_tweets.each do |pickup_tweet| %>
-  <%= pickup_tweet.tweet_user_name %>:<%= pickup_tweet.text %><br />
-<% end %>
+<h1>コロンボ</h1>
+
+<div class="row"> 
+  <% @pickup_tweets.each do |pickup_tweet| %>
+    <div class="media span6">
+      <span class="pull-left">
+        <%= image_tag pickup_tweet.tweet_user_image_url, class: 'media-object img-rounded' %>
+      </span>
+      <div class="media-body">
+        <div class="media-hedding">
+          <%= pickup_tweet.tweet_user_name %>
+        </div>
+        <div class="media">
+          <%= pickup_tweet.text %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
