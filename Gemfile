@@ -43,11 +43,9 @@ gem 'zurui-sass-rails'
 gem 'twitter'
 gem 'kaminari'
 
-group :assets do
-  gem 'sass-rails', '~> 4.0.3'
-  gem 'compass-rails'
-  gem 'zurui-sass-rails'
-end
+gem 'sass-rails', '~> 4.0.3'
+gem 'compass-rails'
+gem 'zurui-sass-rails'
 
 group :development do
   gem 'rails-footnotes', '>= 4.0.0', '<5'
