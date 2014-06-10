@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140531034759) do
+ActiveRecord::Schema.define(version: 20140609234854) do
 
   create_table "pickup_tweets", force: true do |t|
     t.text     "attrs"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140531034759) do
     t.string   "tweet_user_screen_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "keyword"
   end
 
   add_index "pickup_tweets", ["tweet_at"], name: "index_pickup_tweets_on_tweet_at"

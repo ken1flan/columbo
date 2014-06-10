@@ -1,8 +1,9 @@
 class PickupTweet < ActiveRecord::Base
 
+  default_scope { order('tweet_at DESC') }
   scope :can_display, ->{ where(truncated: false) }
 
-  SEARCH_CONDITIONS = [
+  SEARCH_KEYWORDS = [
     "うちのカミさんが",
   ]
 
@@ -12,12 +13,13 @@ class PickupTweet < ActiveRecord::Base
       consumer_secret: Rails.application.secrets.twitter_consumer_secret,
     }
     client = Twitter::REST::Client.new(twitter_config)
-    SEARCH_CONDITIONS.each do |condition|
-      tweets = client.search(condition)
+    SEARCH_KEYWORDS.each do |keyword|
+      tweets = client.search(keyword)
       tweets.each do |tweet|
         pickup_tweet = PickupTweet.find_by(tweet_id: tweet.id)
         if(pickup_tweet.blank?)
           pickup_tweet = new(
+            keyword: keyword,
             attrs: tweet.attrs.to_s,
             tweet_id: tweet.id,
             text: tweet.text,
