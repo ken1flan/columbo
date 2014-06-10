@@ -11,7 +11,7 @@
           <%= pickup_tweet.tweet_user_name %>
         </div>
         <div class="media">
-          <%= pickup_tweet.text %>
+          <%= emphasize_keyword(pickup_tweet.text, pickup_tweet.keyword) %>
         </div>
       </div>
     </div>
