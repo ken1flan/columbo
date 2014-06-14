@@ -16,7 +16,7 @@ class PickupTweet < ActiveRecord::Base
     SEARCH_KEYWORDS.each do |keyword|
       tweets = client.search(keyword)
       tweets.each do |tweet|
-        pickup_tweet = PickupTweet.find_by(tweet_id: tweet.id)
+        pickup_tweet = PickupTweet.find_by(tweet_id: tweet.id.to_s)
         if(pickup_tweet.blank?)
           pickup_tweet = new(
             keyword: keyword,
