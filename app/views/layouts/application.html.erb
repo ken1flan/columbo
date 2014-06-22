@@ -8,6 +8,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if user_signed_in? %> 
+    ログイン済
+  <% else %>
+    <%= link_to 'twitterログイン', user_omniauth_authorize_path(:twitter) %>
+  <% end %>
   <div class="container">
     <%= yield %>
   </div>
