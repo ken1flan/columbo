@@ -8,12 +8,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if user_signed_in? %> 
-    ログイン済
-  <% else %>
-    <%= link_to 'twitterログイン', user_omniauth_authorize_path(:twitter) %>
-  <% end %>
   <div class="container">
+    <span class="pull-right">
+      <% if user_signed_in? %> 
+        <%= link_to "ログアウト", destroy_user_session_path, :method => :delete %>
+      <% else %>
+        <%= link_to 'twitterログイン', user_omniauth_authorize_path(:twitter) %>
+      <% end %>
+    </span>
+
     <%= yield %>
   </div>
 </body>
