@@ -22,9 +22,15 @@ gem 'spring',        group: :development
 gem 'twitter'
 gem 'kaminari'
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
 group :development do
   gem 'rails-footnotes', '>= 4.0.0', '<5'
   gem 'better_errors'
+  gem 'letter_opener'
 end
 
 group :development, :test do
