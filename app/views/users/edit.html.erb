@@ -1,0 +1,6 @@
+<h1>Edit My Profile</h1>
+<% render 'shared/flash' %>
+<%= form_for(@user) do |f| %>
+  ユーザ名： <%= f.text_field 'name' %><br>
+  <%= f.submit "保存", class:"btn btn-info"%>
+<% end %>
