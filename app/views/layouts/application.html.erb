@@ -16,7 +16,9 @@
         <%= link_to 'twitterログイン', user_omniauth_authorize_path(:twitter) %>
         <%= link_to 'facebookログイン', user_omniauth_authorize_path(:facebook) %>
       <% end %>
-    </span>
+    </span><br>
+
+    <%= render 'shared/flash' %>
 
     <%= yield %>
   </div>

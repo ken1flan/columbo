@@ -8,13 +8,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    binding.pry
     @user.attributes = user_params
     if @user.save
       flash[:notice] = '保存しました'
       redirect_to :action => :show
     else
-      flash[:notice] = '保存に失敗しました'
+      flash[:error] = '保存に失敗しました'
       render :action => :edit
     end
   end

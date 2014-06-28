@@ -1,4 +1,3 @@
 <h1>My Profile</h1>
-<% render 'shared/flash' %>
-<span class="pull-right"><a href="/" class="btn btn-info">編集</a></span>
+<span class="pull-right"><%= link_to '編集', edit_user_path, class:"btn btn-info" %></span>
 ユーザ名： <%= current_user.name %></b>
