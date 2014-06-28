@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.1.1"
 
 gem 'rails', '4.1.0'
 gem 'sass-rails', '~> 4.0.3'
@@ -22,9 +22,15 @@ gem 'spring',        group: :development
 gem 'twitter'
 gem 'kaminari'
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
 group :development do
   gem 'rails-footnotes', '>= 4.0.0', '<5'
   gem 'better_errors'
+  gem 'letter_opener'
 end
 
 group :development, :test do
