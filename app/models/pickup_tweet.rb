@@ -7,6 +7,8 @@ class PickupTweet < ActiveRecord::Base
     "うちのカミさんが",
   ]
 
+  MAX_RECORDS = 1000
+
   def self.get_tweets
     twitter_config = {
       consumer_key: Rails.application.secrets.twitter_consumer_key,
@@ -33,6 +35,14 @@ class PickupTweet < ActiveRecord::Base
         else
           pickup_tweet.update_attributes(truncated: tweet.truncated?)
         end
+      end
+    end
+  end
+
+  def self.housekeep
+    self.transaction do
+      self.order('created_at DESC').offset(MAX_RECORDS).each do |r|
+        r.delete
       end
     end
   end
