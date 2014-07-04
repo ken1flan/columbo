@@ -41,7 +41,7 @@ class PickupTweet < ActiveRecord::Base
 
   def self.housekeep
     self.transaction do
-      self.order('created_at DESC').offset(MAX_RECORDS).each do |r|
+      self.order('tweet_at DESC').offset(MAX_RECORDS).each do |r|
         r.delete
       end
     end
