@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
   resource :user
+
+  get 'cron/pickup_tweets' => 'cron#pickup_tweets'
+  get 'cron/housekeep_tweets' => 'cron#housekeep_tweets'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
