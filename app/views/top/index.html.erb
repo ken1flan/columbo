@@ -2,7 +2,7 @@
 
 <div class="row"> 
   <% @pickup_tweets.each do |pickup_tweet| %>
-    <div class="media span6">
+    <div class="media col-md-6">
       <span class="pull-left">
         <%= image_tag pickup_tweet.tweet_user_image_url, class: 'media-object img-rounded' %>
       </span>
