@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/NARKOZ/activerecord-reputation-system.git
+  revision: 01197ad78cac3136317b2884b61ed3da34c607d0
+  branch: rails4
+  specs:
+    activerecord-reputation-system (2.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -232,6 +239,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-reputation-system!
   better_errors
   coffee-rails (~> 4.0.0)
   compass-rails

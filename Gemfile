@@ -27,6 +27,9 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 
+# いいね
+gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4'
+
 group :development do
   gem 'rails-footnotes', '>= 4.0.0', '<5'
   gem 'better_errors'

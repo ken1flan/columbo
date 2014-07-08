@@ -1,4 +1,5 @@
 class PickupTweet < ActiveRecord::Base
+  has_reputation :likes, source: :user, aggregated_by: :sum
 
   default_scope { order('tweet_at DESC') }
   scope :can_display, ->{ where(truncated: false) }
