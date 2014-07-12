@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
   resource :user
+  resource :reputation, only: [] do
+    get 'pickup_tweets/:id/:up_down' => 'reputation#pickup_tweet'
+  end
 
   get 'cron/pickup_tweets' => 'cron#pickup_tweets'
   get 'cron/housekeep_tweets' => 'cron#housekeep_tweets'
