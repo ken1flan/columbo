@@ -15,3 +15,12 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+// 共通の初期設定
+$(function () {
+});
+
+// pickup_tweetのいいねボタン処理
+$(document).on('click', '.likePickupTweet', function () {
+
+});

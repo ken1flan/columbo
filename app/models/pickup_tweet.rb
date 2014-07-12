@@ -10,6 +10,15 @@ class PickupTweet < ActiveRecord::Base
 
   MAX_RECORDS = 1000
 
+  def is_liked_by?(user)
+    evaluation = evaluations.where(source_id: user.id).first
+    evaluation.blank? || evaluation.value == 0 ? false : true
+  end
+
+  def like_number
+    reputation_for(:likes).to_i
+  end
+
   def self.get_tweets
     twitter_config = {
       consumer_key: Rails.application.secrets.twitter_consumer_key,
