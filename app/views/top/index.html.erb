@@ -15,9 +15,9 @@
           <span class="pull-right">
             <button id="like_pickup_tweet_<%= pickup_tweet.id %>" type="button" class="likePickupTweet btn btn-default">
               <% if user_signed_in? && pickup_tweet.is_liked_by?(current_user) %>
-                <span class="glyphicon glyphicon-star"></span>
+                <span class="star glyphicon glyphicon-star"></span>
               <% else %>
-                <span class="glyphicon glyphicon-star-empty"></span> 
+                <span class="star glyphicon glyphicon-star-empty"></span> 
               <% end %>
               <span class="value"><%= pickup_tweet.like_number %><span>
             </button>

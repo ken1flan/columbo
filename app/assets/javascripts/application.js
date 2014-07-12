@@ -22,5 +22,22 @@ $(function () {
 
 // pickup_tweetのいいねボタン処理
 $(document).on('click', '.likePickupTweet', function () {
-
+  var id = $(this).attr("id").substring(18);
+  var up_down;
+  if($(this).children(".star").attr("class").indexOf("star-empty") > 0){
+    up_down = 'up';
+  } else {
+    up_down = 'down';
+  }
+  $.getJSON('/reputation/pickup_tweets/' + id + '/' + up_down + '.json', function (json) {
+    var button = $("#like_pickup_tweet_" + json.id);
+    if(json.evaluation_value == 0){
+      button.children(".star").removeClass("glyphicon-star");
+      button.children(".star").addClass("glyphicon-star-empty");
+    } else {
+      button.children(".star").removeClass("glyphicon-star-empty");
+      button.children(".star").addClass("glyphicon-star");
+    }
+    button.children(".value").text(json.likes_count);
+  });
 });
