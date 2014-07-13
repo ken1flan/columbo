@@ -9,12 +9,12 @@
 
 ### twitterとfacebookにアプリケーションを登録する
 twitterアプリケーションを登録し、環境変数に下記項目を設定する。
-|COLUMBO_TWITTER_CONSUMER_KEY|twitterアプリケーションのコンシューマーキー|
-|COLUMBO_TWITTER_CONSUMER_SECRET|twitterアプリケーションのコンシューマーシークレット|
-|COLUMBO_TWITTER_ACCESS_TOKEN|twitterアプリケーションのアクセストークン|
-|COLUMBO_TWITTER_ACCESS_TOKEN_SECRET|twitterアプリケーションのアクセストークンシークレット|
-|COLUMBO_FACEBOOK_APP_ID|facebookアプリケーションのID|
-|COLUMBO_FACEBOOK_APP_SECRET|facebookアプリケーションのシークレット|
+| COLUMBO_TWITTER_CONSUMER_KEY        | twitterアプリケーションのコンシューマーキー           |
+| COLUMBO_TWITTER_CONSUMER_SECRET     | twitterアプリケーションのコンシューマーシークレット   |
+| COLUMBO_TWITTER_ACCESS_TOKEN        | twitterアプリケーションのアクセストークン             |
+| COLUMBO_TWITTER_ACCESS_TOKEN_SECRET | twitterアプリケーションのアクセストークンシークレット |
+| COLUMBO_FACEBOOK_APP_ID             | facebookアプリケーションのID                          |
+| COLUMBO_FACEBOOK_APP_SECRET         | facebookアプリケーションのシークレット                |
 
 
 ### アプリケーションの取得と設定、起動
