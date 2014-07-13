@@ -9,6 +9,10 @@
 
 ### twitterとfacebookにアプリケーションを登録する
 twitterアプリケーションを登録し、環境変数に下記項目を設定する。
+
+
+| 環境変数名                          | 説明                                                  |
+| ----------------------------------- | ----------------------------------------------------- |
 | COLUMBO_TWITTER_CONSUMER_KEY        | twitterアプリケーションのコンシューマーキー           |
 | COLUMBO_TWITTER_CONSUMER_SECRET     | twitterアプリケーションのコンシューマーシークレット   |
 | COLUMBO_TWITTER_ACCESS_TOKEN        | twitterアプリケーションのアクセストークン             |
