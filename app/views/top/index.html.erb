@@ -2,7 +2,7 @@
 
 <div class="row"> 
   <% @pickup_tweets.each do |pickup_tweet| %>
-    <div class="media span6">
+    <div class="media col-md-6">
       <span class="pull-left">
         <%= image_tag pickup_tweet.tweet_user_image_url, class: 'media-object img-rounded' %>
       </span>
@@ -12,6 +12,16 @@
         </div>
         <div class="media">
           <%= emphasize_keyword(pickup_tweet.text, pickup_tweet.keyword) %>
+          <span class="pull-right">
+            <button id="like_pickup_tweet_<%= pickup_tweet.id %>" type="button" class="likePickupTweet btn btn-default">
+              <% if user_signed_in? && pickup_tweet.is_liked_by?(current_user) %>
+                <span class="star glyphicon glyphicon-star"></span>
+              <% else %>
+                <span class="star glyphicon glyphicon-star-empty"></span> 
+              <% end %>
+              <span class="value"><%= pickup_tweet.like_number %><span>
+            </button>
+          </span>
         </div>
       </div>
     </div>
