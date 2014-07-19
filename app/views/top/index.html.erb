@@ -1,27 +1,35 @@
-<h1>コロンボ</h1>
-
-<div class="row"> 
+<div id="masonry_container">
+  <div class="item col-md-4 col-xs-12" style="padding: 10px;">
+    <div style="background-color: #EFEFEF; padding: 10px;">
+      <h1>Columbo</h1>
+      <p>
+        世の中の男性は恥ずかしがり屋さん。 「うちのカミさんが…」と友人や同僚によくボヤくが、それは実はノロケのこと。 そんな不思議な生態を集め、世の中に発信することで、世間の夫婦仲をより良くしようという、サービスです。
+      </p>
+    </div>
+  </div>
   <% @pickup_tweets.each do |pickup_tweet| %>
-    <div class="media col-md-6">
-      <span class="pull-left">
-        <%= image_tag pickup_tweet.tweet_user_image_url, class: 'media-object img-rounded' %>
-      </span>
-      <div class="media-body">
-        <div class="media-hedding">
-          <%= pickup_tweet.tweet_user_name %>
-        </div>
-        <div class="media">
-          <%= emphasize_keyword(pickup_tweet.text, pickup_tweet.keyword) %>
-          <span class="pull-right">
-            <button id="like_pickup_tweet_<%= pickup_tweet.id %>" type="button" class="likePickupTweet btn btn-default">
-              <% if user_signed_in? && pickup_tweet.is_liked_by?(current_user) %>
-                <span class="star glyphicon glyphicon-star"></span>
-              <% else %>
-                <span class="star glyphicon glyphicon-star-empty"></span> 
-              <% end %>
-              <span class="value"><%= pickup_tweet.like_number %><span>
-            </button>
-          </span>
+    <div class="item col-md-4 col-xs-12" style="padding: 3px;">
+      <div class="media" style="background-color: white; border: solid #EFEFEF 1px; padding: 5px;" >
+        <span class="pull-left" style="margin: 5px;">
+          <%= image_tag pickup_tweet.tweet_user_image_url, class: 'media-object img-rounded' %>
+        </span>
+        <div class="media-body">
+          <div class="media-hedding">
+            <%= pickup_tweet.tweet_user_name %>
+          </div>
+          <div class="media">
+            <%= emphasize_keyword(pickup_tweet.text, pickup_tweet.keyword) %>
+            <span class="pull-right">
+              <button id="like_pickup_tweet_<%= pickup_tweet.id %>" type="button" class="likePickupTweet btn btn-default">
+                <% if user_signed_in? && pickup_tweet.is_liked_by?(current_user) %>
+                  <span class="star glyphicon glyphicon-star"></span>
+                <% else %>
+                  <span class="star glyphicon glyphicon-star-empty"></span> 
+                <% end %>
+                <span class="value"><%= pickup_tweet.like_number %><span>
+              </button>
+            </span>
+          </div>
         </div>
       </div>
     </div>
