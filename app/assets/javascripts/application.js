@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
@@ -19,7 +20,6 @@
 // 共通の初期設定
 $(function () {
   var $container = $('#masonry_container');
-  // initialize
   $container.masonry({
     itemSelector: '.item'
   });
