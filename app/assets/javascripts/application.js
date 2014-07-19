@@ -18,6 +18,11 @@
 
 // 共通の初期設定
 $(function () {
+  var $container = $('#masonry_container');
+  // initialize
+  $container.masonry({
+    itemSelector: '.item'
+  });
 });
 
 // pickup_tweetのいいねボタン処理
