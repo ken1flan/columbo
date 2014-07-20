@@ -1,7 +1,9 @@
 require 'test_helper'
 
-class PickupTweetTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe PickupTweet do
+  context 'テストのとき' do
+    it 'テスト' do
+      'hoge'.must_equal 'hoge'
+    end
+  end
 end

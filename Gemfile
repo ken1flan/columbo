@@ -37,11 +37,18 @@ group :development do
   gem 'letter_opener'
 end
 
+group :test do
+  gem 'minitest-spec-rails' # describeやitが使える
+  gem 'minitest-matchers'   # いろいろなmatcher
+  gem 'minitest-reporters'  # minitestの実行結果をキレイに見せる
+end
+
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'sqlite3'
+  gem 'factory_girl'        # fixturesより細やかなデータを記述できる
 end
 
 group :production do
