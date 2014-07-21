@@ -20,9 +20,12 @@
 // 共通の初期設定
 $(function () {
   var $container = $('#masonry_container');
+
+$container.imagesLoaded(function(){
   $container.masonry({
-    itemSelector: '.item'
-  });
+      itemSelector: '.item'
+    });
+  }); //
 });
 
 // pickup_tweetのいいねボタン処理
