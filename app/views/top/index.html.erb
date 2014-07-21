@@ -1,17 +1,21 @@
 <div id="masonry_container">
-  <div class="item col-md-4 col-xs-12" style="padding: 10px;">
-    <div style="background-color: #EFEFEF; padding: 10px;">
-      <h1>Columbo</h1>
-      <p>
-        世の中の男性は恥ずかしがり屋さん。 「うちのカミさんが…」と友人や同僚によくボヤくが、それは実はノロケのこと。 そんな不思議な生態を集め、世の中に発信することで、世間の夫婦仲をより良くしようという、サービスです。
-      </p>
+  <div class="item col-md-4 col-xs-12">
+    <div style="padding: 10px;">
+      <div style="background-color: #EFEFEF; padding: 10px;">
+        <h1>Columbo</h1>
+        <p>
+        世の中の既婚男性は恥ずかしがり屋さん。 <br />
+        <b>「うちのカミさんが…」</b>と友人や同僚によくボヤくが、それは実はノロケのこと。
+        そんな不思議な生態を集め、世の中に発信することで、世間の夫婦仲をより良くしようという、サービスです。
+        </p>
+      </div>
     </div>
   </div>
   <% @pickup_tweets.each do |pickup_tweet| %>
     <div class="item col-md-4 col-xs-12" style="padding: 3px;">
       <div class="media" style="background-color: white; border: solid #EFEFEF 1px; padding: 5px;" >
         <span class="pull-left" style="margin: 5px;">
-          <%= image_tag pickup_tweet.tweet_user_image_url, class: 'media-object img-rounded' %>
+          <%= image_tag pickup_tweet.tweet_user_image_url, class: 'media-object img-rounded', width: 48, height: 48 %>
         </span>
         <div class="media-body">
           <div class="media-hedding">

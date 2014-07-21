@@ -36,4 +36,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Enable Shoulda minitest-spec-rails
+  config.minitest_spec_rails.mini_shoulda = true
 end
