@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Columbo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="dy-qhBEf0nxOzqFVaYlXvkv9ay36m165Sk-BsHFy3g8" /><%# google webmaster tools verification tag %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -24,5 +25,6 @@
 
     <%= yield %>
   </div>
+  <%= render 'shared/seo_scripts' %>
 </body>
 </html>
