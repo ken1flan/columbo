@@ -21,12 +21,26 @@
 $(function () {
   var $container = $('#masonry_container');
 
-$container.imagesLoaded(function(){
-  $container.masonry({
+  $container.imagesLoaded(function(){
+    $container.masonry({
       itemSelector: '.item'
     });
   }); //
+
+  $container.infinitescroll({
+      navSelector: '.pagination',
+      nextSelector: '.next a',
+      itemSelector: '.item'
+    },
+    function ( newElements ) {
+      var $newElements = $( newElements );
+      $newElements.imagesLoaded( function () {
+        $container.masonry('appended', $newElements, true);
+      });
+    }
+  );
 });
+
 
 // pickup_tweetのいいねボタン処理
 $(document).on('click', '.likePickupTweet', function () {
