@@ -2,23 +2,41 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Columbo</title>
+  <title><%= yield :title %></title>
+  <meta name="desctription" content="<%= yield :desctiption %>">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body style="padding-top: 70px;">
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to 'Columbo', root_path, class: 'navbar-brand' %>
+      </div>
+      <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %> 
+            <li><%= link_to current_user.name, user_path %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+            <li><%= link_to 'twitterログイン', user_omniauth_authorize_path(:twitter) %></li>
+            <li><%= link_to 'facebookログイン', user_omniauth_authorize_path(:facebook) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
-    <span class="pull-right">
-      <% if user_signed_in? %> 
-        <%= link_to current_user.name, user_path %>
-        <%= link_to "ログアウト", destroy_user_session_path, :method => :delete %>
-      <% else %>
-        <%= link_to 'twitterログイン', user_omniauth_authorize_path(:twitter) %>
-        <%= link_to 'facebookログイン', user_omniauth_authorize_path(:facebook) %>
-      <% end %>
-    </span><br>
 
     <%= render 'shared/flash' %>
 
