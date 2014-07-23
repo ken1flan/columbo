@@ -2,6 +2,9 @@ require 'test_helper'
 
 describe PickupTweet do
   describe 'default_scope' do
+    it 'test' do
+      t = build(:pickup_tweet)
+    end
   end
 
   describe '.can_display' do
