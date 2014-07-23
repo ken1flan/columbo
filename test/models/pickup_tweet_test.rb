@@ -1,9 +1,21 @@
 require 'test_helper'
 
 describe PickupTweet do
-  context 'テストのとき' do
-    it 'テスト' do
-      'hoge'.must_equal 'hoge'
-    end
+  describe 'default_scope' do
+  end
+
+  describe '.can_display' do
+  end
+
+  describe '#is_liked_by?' do
+  end
+
+  describe '#like_number' do
+  end
+
+  describe '.get_tweets' do
+  end
+
+  describe '.housekeep' do
   end
 end
