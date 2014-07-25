@@ -45,3 +45,13 @@ describe PickupTweet do
   describe '.housekeep' do
   end
 end
+
+module Twitter
+  module REST
+    class Client
+      def search(keyword)
+        # TODO: 
+      end
+    end
+  end
+end
