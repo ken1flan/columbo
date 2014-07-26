@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'twitter_gem_mock'
 
 describe PickupTweet do
   describe 'default_scope' do
@@ -40,18 +41,30 @@ describe PickupTweet do
   end
 
   describe '.get_tweets' do
+    before do
+      twitter_config = {
+        consumer_key: Rails.application.secrets.twitter_consumer_key,
+        consumer_secret: Rails.application.secrets.twitter_consumer_secret,
+      }
+      client = Twitter::REST::Client.new(twitter_config)
+      @tweets = client.search_org('cat')
+      Twitter::REST::Client.set_return_tweets(@tweets)
+    end
+
+    context 'DBに同一IDのツイートがないとき' do
+      it 'ツイートが登録されていること' do
+        PickupTweet.get_tweets
+        pickup_tweet = PickupTweet.find_by(tweet_id: @tweets.first.id)
+        pickup_tweet.tweet_id.must_equal @tweets.first.id.to_s
+      end
+    end
+
+    context 'DBに同一IDのツイートが登録されているとき' do
+      it 'ツイートが更新されていること' do
+      end
+    end
   end
 
   describe '.housekeep' do
-  end
-end
-
-module Twitter
-  module REST
-    class Client
-      def search(keyword)
-        # TODO: 
-      end
-    end
   end
 end
