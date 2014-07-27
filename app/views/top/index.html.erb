@@ -1,7 +1,12 @@
+<%
+    title('Columbo')
+    description('既婚男性が友人や同僚によく「うちのカミさんがね…」とボヤくが、これはノロケ。その不思議な生態を集め、世の中に再発信し、夫婦仲をより良くしようというサービス。')
+
+  %>
+
 <div id="masonry_container">
-  <div class="item col-md-4 col-xs-12">
-    <div style="padding: 10px;">
-      <div style="background-color: #EFEFEF; padding: 10px;">
+  <div class="item col-md-4 col-xs-12" style="padding: 3px;">
+      <div style="background-color: #EFEFEF; padding: 3px 15px;">
         <h1>Columbo</h1>
         <p>
         世の中の既婚男性は恥ずかしがり屋さん。 <br />
@@ -9,7 +14,6 @@
         そんな不思議な生態を集め、世の中に発信することで、世間の夫婦仲をより良くしようという、サービスです。
         </p>
       </div>
-    </div>
   </div>
   <% @pickup_tweets.each do |pickup_tweet| %>
     <div class="item col-md-4 col-xs-12" style="padding: 3px;">

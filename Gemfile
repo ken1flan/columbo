@@ -48,7 +48,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'sqlite3'
-  gem 'factory_girl'        # fixturesより細やかなデータを記述できる
+  gem 'factory_girl_rails'  # fixturesより細やかなデータを記述できる
 end
 
 group :production do
