@@ -47,10 +47,34 @@ describe PickupTweet do
 
   describe '.get_attributes_from_tweet(tweet, keyword)' do
     context 'tweetとkeywordが指定されているとき' do
-      it 'tweet内容が設定されていること' do
+      before do
+        @tweet_attrs = {
+          id: 100,
+          text: 'tweet_text',
+          tweet_at: 1.day.ago,
+          truncated: false,
+          user: {
+            id: 200,
+            name: 'tweet_user_name',
+            screen_name: 'tweet_user_screen_name',
+          }
+        }
+        @tweet = Twitter::Tweet.new(@tweet_attrs)
+        @keyword = 'うちのカミさんが'
+
+        @result = PickupTweet.get_attributes_from_tweet(@tweet, @keyword)
       end
 
-      it 'keywordが設定されていること' do
+      it 'tweet内容とkeywordが設定されていること' do
+        @result[:attrs].must_equal(@tweet.attrs.to_s)
+        @result[:tweet_id].must_equal(@tweet.id)
+        @result[:text].must_equal(@tweet.text)
+        @result[:truncated].must_equal(@tweet.truncated?)
+        # TODO: profile_image_urlをどうやって指定するか調べる
+        # @result[:tweet_user_image_url].must_equal(@tweet.user.profile_image_url)
+        @result[:tweet_user_name].must_equal(@tweet.user.name)
+        @result[:tweet_user_screen_name].must_equal(@tweet.user.screen_name)
+        @result[:keyword].must_equal(@keyword)
       end
     end
   end
