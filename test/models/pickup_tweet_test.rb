@@ -80,13 +80,62 @@ describe PickupTweet do
   end
 
   describe '.create_or_update' do
+    before do
+      @attributes = { attrs: 'tweet.attrs',
+        tweet_id: 100.to_s,
+        text: 'tweet.text',
+        tweet_at: 1.day.ago,
+        truncated: false,
+        tweet_user_image_url: 'tweet.user.profile_image_url',
+        tweet_user_name: 'tweet.user.name',
+        tweet_user_screen_name: 'tweet.user.screen_name',
+        keyword: 'keyword'
+      }
+    end
+
     context 'DBに登録されていないtweet_idのとき' do
       it '正しく登録されていること' do
+        PickupTweet.create_or_update(@attributes)
+        @result = PickupTweet.find_by(tweet_id: @attributes[:tweet_id])
+        @result.tweet_id.must_equal(@attributes[:tweet_id])
+        @result.text.must_equal(@attributes[:text])
+        @result.truncated.must_equal(@attributes[:truncated])
+        @result.tweet_user_image_url.must_equal(@attributes[:tweet_user_image_url])
+        @result.tweet_user_name.must_equal(@attributes[:tweet_user_name])
+        @result.tweet_user_screen_name.must_equal(@attributes[:tweet_user_screen_name])
+        @result.keyword.must_equal(@attributes[:keyword])
       end
     end
 
     context 'DBに登録されているtweet_idのとき' do
+      before do
+        PickupTweet.create_or_update(@attributes)
+        @original = PickupTweet.find_by(tweet_id: @attributes[:tweet_id])
+        @updated_attributes = { attrs: 'updated_tweet.attrs',
+          tweet_id: @attributes[:tweet_id],
+          text: 'updated_tweet.text',
+          tweet_at: 1.hour.ago,
+          truncated: false,
+          tweet_user_image_url: 'updated_tweet.user.profile_image_url',
+          tweet_user_name: 'updated_tweet.user.name',
+          tweet_user_screen_name: 'updated_tweet.user.screen_name',
+          keyword: 'updated_keyword'
+        }
+        PickupTweet.create_or_update(@updated_attributes)
+        @result = PickupTweet.find_by(tweet_id: @attributes[:tweet_id])
+      end
+
       it '正しく更新されていること' do
+        @result.id.must_equal(@original.id)
+        @result.tweet_id.must_equal(@original.tweet_id)
+
+        @result.text.must_equal(@updated_attributes[:text])
+        @result.truncated.must_equal(@updated_attributes[:truncated])
+        @result.tweet_user_image_url.must_equal(@updated_attributes[:tweet_user_image_url])
+        @result.tweet_user_name.must_equal(@updated_attributes[:tweet_user_name])
+        @result.tweet_user_screen_name.must_equal(@updated_attributes[:tweet_user_screen_name])
+        @result.keyword.must_equal(@updated_attributes[:keyword])
+
       end
     end
   end
