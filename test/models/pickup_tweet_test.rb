@@ -34,6 +34,40 @@ describe PickupTweet do
   end
 
   describe '#is_liked_by?' do
+    before do
+      @user = create(:user)
+      @pickup_tweet = create(:pickup_tweet)
+    end
+
+    context 'userがlikeをしていないとき' do
+      it 'falseであること' do
+        ret = @pickup_tweet.is_liked_by?(@user)
+        ret.must_equal(false)
+      end
+    end
+
+    context 'userがlikeをしたとき' do
+      before do
+        @pickup_tweet.add_or_update_evaluation(:likes, 1, @user)
+      end
+
+      it 'trueであること' do
+        ret = @pickup_tweet.is_liked_by?(@user)
+        ret.must_equal(true)
+      end
+    end
+
+    context 'userがlikeをしたあと取り消したとき' do
+      before do
+        @pickup_tweet.add_or_update_evaluation(:likes, 1, @user)
+        @pickup_tweet.add_or_update_evaluation(:likes, 0, @user)
+      end
+
+      it 'falseであること' do
+        ret = @pickup_tweet.is_liked_by?(@user)
+        ret.must_equal(false)
+      end
+    end
   end
 
   describe '#like_number' do
