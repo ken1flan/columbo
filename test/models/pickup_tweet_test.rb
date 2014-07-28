@@ -39,10 +39,37 @@ describe PickupTweet do
   describe '#like_number' do
   end
 
-  describe '.get_tweets' do
-  end
+  # TODO: Twitterのモックを作る
+  #describe '.get_tweets' do
+  #end
 
   describe '.housekeep' do
+    context "#{PickupTweet::MAX_RECORDS}件登録されているとき" do
+      before do
+        create_list(:pickup_tweet, PickupTweet::MAX_RECORDS)
+        PickupTweet.housekeep
+      end
+
+      it '登録件数が変わらないこと' do
+        PickupTweet.count.must_equal(PickupTweet::MAX_RECORDS)
+      end
+    end
+
+    context "#{PickupTweet::MAX_RECORDS + 1}件登録されているとき" do
+      before do
+        create_list(:pickup_tweet, PickupTweet::MAX_RECORDS)
+        @oldest = create(:pickup_tweet, tweet_at: 100.years.ago)
+        PickupTweet.housekeep
+      end
+
+      it "登録件数が#{PickupTweet::MAX_RECORDS}であること" do
+        PickupTweet.count.must_equal(PickupTweet::MAX_RECORDS)
+      end
+
+      it "一番前につぶやかれたレコードが削除されていること" do
+        proc { PickupTweet.find(@oldest.id) }.must_raise(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 
   describe '.get_attributes_from_tweet(tweet, keyword)' do
@@ -135,7 +162,6 @@ describe PickupTweet do
         @result.tweet_user_name.must_equal(@updated_attributes[:tweet_user_name])
         @result.tweet_user_screen_name.must_equal(@updated_attributes[:tweet_user_screen_name])
         @result.keyword.must_equal(@updated_attributes[:keyword])
-
       end
     end
   end
