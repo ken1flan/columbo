@@ -71,6 +71,52 @@ describe PickupTweet do
   end
 
   describe '#like_number' do
+    before do
+      @users = create_list(:user, 2)
+      @pickup_tweet = create(:pickup_tweet)
+    end
+
+    context '誰もlikeしてないとき' do
+      it '0であること' do
+        ret = @pickup_tweet.like_number
+        ret.must_equal(0)
+      end
+    end
+
+    context 'likeしたが、取り消したひとがいるとき' do
+      before do
+        @pickup_tweet.add_or_update_evaluation(:likes, 1, @users[0])
+        @pickup_tweet.add_or_update_evaluation(:likes, 0, @users[0])
+      end
+
+      it '0であること' do
+        ret = @pickup_tweet.like_number
+        ret.must_equal(0)
+      end
+    end
+
+    context 'likeしたひとが1人いるとき' do
+      before do
+        @pickup_tweet.add_or_update_evaluation(:likes, 1, @users[0])
+      end
+
+      it '1であること' do
+        ret = @pickup_tweet.like_number
+        ret.must_equal(1)
+      end
+    end
+
+    context 'likeしたひとが2人いるとき' do
+      before do
+        @pickup_tweet.add_or_update_evaluation(:likes, 1, @users[0])
+        @pickup_tweet.add_or_update_evaluation(:likes, 1, @users[1])
+      end
+
+      it '1であること' do
+        ret = @pickup_tweet.like_number
+        ret.must_equal(2)
+      end
+    end
   end
 
   # TODO: Twitterのモックを作る
