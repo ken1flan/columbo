@@ -28,23 +28,8 @@ class PickupTweet < ActiveRecord::Base
     SEARCH_KEYWORDS.each do |keyword|
       tweets = client.search(keyword)
       tweets.each do |tweet|
-        pickup_tweet = PickupTweet.find_by(tweet_id: tweet.id.to_s)
-        if(pickup_tweet.blank?)
-          pickup_tweet = new(
-            keyword: keyword,
-            attrs: tweet.attrs.to_s,
-            tweet_id: tweet.id,
-            text: tweet.text,
-            tweet_at: tweet.created_at,
-            truncated: tweet.truncated?,
-            tweet_user_image_url: tweet.user.profile_image_url.to_s,
-            tweet_user_name: tweet.user.name,
-            tweet_user_screen_name: tweet.user.screen_name,
-          )
-          pickup_tweet.save!
-        else
-          pickup_tweet.update_attributes(truncated: tweet.truncated?)
-        end
+        pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, keyword)
+        PickupTweet.create_or_update(pickup_tweet_attrs)
       end
     end
   end
@@ -56,4 +41,29 @@ class PickupTweet < ActiveRecord::Base
       end
     end
   end
+
+  private
+    def self.get_attributes_from_tweet(tweet, keyword)
+      { attrs: tweet.attrs.to_s,
+        tweet_id: tweet.id,
+        text: tweet.text,
+        tweet_at: tweet.created_at,
+        truncated: tweet.truncated?,
+        tweet_user_image_url: tweet.user.profile_image_url.to_s,
+        tweet_user_name: tweet.user.name,
+        tweet_user_screen_name: tweet.user.screen_name,
+        keyword: keyword
+      }
+    end
+
+    def self.create_or_update(attributes)
+      pickup_tweet = PickupTweet.find_by(tweet_id: attributes[:tweet_id])
+      if(pickup_tweet.blank?)
+        pickup_tweet = new( attributes )
+        pickup_tweet.save!
+      else
+        pickup_tweet.update_attributes( attributes )
+      end
+      pickup_tweet
+    end
 end
