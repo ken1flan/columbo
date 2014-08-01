@@ -14,19 +14,13 @@ class User < ActiveRecord::Base
     user = signed_in_resource ? signed_in_resource : identity.user
 
     if user.nil?
-      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-      email = auth.info.email if email_is_verified
-      user = User.where(:email => email).first if email
-
-      if user.nil?
-        user = User.new(
-          name: auth.extra.raw_info.name,
-          email: "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
-          password: Devise.friendly_token[0, 20]
-        )
-        user.skip_confirmation!
-        user.save!
-      end
+      user = User.new(
+        name: auth.extra.raw_info.name,
+        email: "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
+        password: Devise.friendly_token[0, 20]
+      )
+      user.skip_confirmation!
+      user.save!
     end
 
     if identity.user != user
