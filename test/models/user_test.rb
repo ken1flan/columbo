@@ -73,14 +73,64 @@ describe User do
           user.must_equal(@user)
         end
       end
+
+      context 'identityに紐付くuserがsigned_in_resourceに指定されているとき' do
+        it 'identity、userは登録されないこと' do
+          user = User.find_for_oauth( @auth, @user )
+
+          User.count.must_equal(@user_count)
+          Identity.count.must_equal(@identity_count)
+          user.must_equal(@user)
+        end
+      end
+
+      context 'identityに紐付くuserと違うuserがsigned_in_resourceに指定されているとき' do
+        before do
+          @another_user = create(:user)
+        end
+
+        it 'identityがsigned_in_resourceに指定されたユーザに紐付けられること' do
+          user = User.find_for_oauth( @auth, @another_user )
+
+          user.wont_equal(@user)
+          user.must_equal(@another_user)
+          Identity.find(@identity.id).user.must_equal(@another_user)
+        end
+      end
     end
 
-    context 'ユーザの紐付いていないidentityをauthに指定しているとき' do
-    end
-
-    context 'signed_in_resourceがauthで指定されているものと違うとき' do
+    context 'userの紐付いていないidentityをauthに指定しているとき' do
       before do
-        @signed_in_resource = create(:user)
+        @user = create(:user)
+        @identity = create(:identity)
+        @auth = OmniAuth::AuthHash.new(
+          provider: @identity.provider,
+          uid: @identity.uid,
+          extra: {
+            raw_info: {
+              name: 'test_name'
+            }
+          }
+        )
+        @user_count = User.count
+        @identity_count = Identity.count
+      end
+
+      context 'signed_in_resourceがnilのとき' do
+        it 'userが作成され、identityに紐付けられること' do
+          user = User.find_for_oauth( @auth, nil )
+          
+          (@user_count + 1).must_equal(User.count)
+          Identity.find(@identity.id).user.must_equal(user)
+        end
+      end
+
+      context 'signed_in_resourceにuserが指定されているとき' do
+        it 'userがidentityに紐付けられること' do
+          user = User.find_for_oauth( @auth, @user )
+
+          Identity.find(@identity.id).user.must_equal(@user)
+        end
       end
     end
   end
