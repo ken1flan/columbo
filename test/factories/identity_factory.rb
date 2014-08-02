@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :identity do
-    user_id 1
+    user_id nil
     provider 'twitter'
     uid 1
   end
