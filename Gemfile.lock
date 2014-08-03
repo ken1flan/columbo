@@ -57,7 +57,14 @@ GEM
     byebug (2.7.0)
       columnize (~> 0.3)
       debugger-linecache (~> 1.2)
+    capybara (2.2.1)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     chunky_png (1.3.1)
+    cliver (0.3.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -126,6 +133,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.5.3)
     minitest (5.3.4)
     minitest-matchers (1.4.1)
       minitest (~> 5.0)
@@ -140,6 +148,8 @@ GEM
     multi_json (1.10.1)
     multipart-post (2.0.0)
     naught (1.0.0)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     oauth (0.4.7)
     oauth2 (0.8.1)
       faraday (~> 0.8)
@@ -163,6 +173,11 @@ GEM
       omniauth-oauth (~> 1.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
+    poltergeist (1.5.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyglot (0.3.5)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -257,6 +272,9 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+    websocket-driver (0.3.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
     yard (0.8.7.4)
     zurui-sass-rails (0.0.4)
       railties (>= 3.1)
@@ -267,6 +285,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-reputation-system!
   better_errors
+  capybara
   coffee-rails (~> 4.0.0)
   compass-rails
   devise
@@ -283,6 +302,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-twitter
   pg
+  poltergeist
   pry-byebug
   pry-doc
   pry-rails

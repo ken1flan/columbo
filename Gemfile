@@ -41,6 +41,8 @@ group :test do
   gem 'minitest-spec-rails' # describeやitが使える
   gem 'minitest-matchers'   # いろいろなmatcher
   gem 'minitest-reporters'  # minitestの実行結果をキレイに見せる
+  gem 'capybara'
+  gem 'poltergeist'
 end
 
 group :development, :test do
