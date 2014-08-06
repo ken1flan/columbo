@@ -1,11 +1,10 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'capybara/rails'
+require 'capybara/poltergeist'
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::JUnitReporter.new]
-
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
@@ -24,4 +23,6 @@ end
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
+
+  register_spec_type(/integration$/i, self)
 end
