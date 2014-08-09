@@ -2,7 +2,6 @@ require 'test_helper'
 
 describe 'ユーザ認証 Integration' do
   before do
-    OmniAuth.config.test_mode = true
     create_list(:pickup_tweet, 10)
   end
 

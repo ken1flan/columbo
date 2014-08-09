@@ -23,6 +23,9 @@ end
 
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
+  OmniAuth.config.test_mode = true
+  Capybara.current_driver = :poltergeist
+  Capybara.javascript_driver = :poltergeist
 
   register_spec_type(/integration$/i, self)
 end
