@@ -28,21 +28,31 @@ describe 'トップページ Integration' do
     end
 
     context 'スターを押したとき' do
-      it 'スターの横の数値が1になること' do
+      before do
         find(:css, "#like_pickup_tweet_#{@target.id}").click
+        sleep 1
+      end
+
+      it 'スターの横の数値が1になること' do
         find(:css, "#like_pickup_tweet_#{@target.id}").text.must_include("1")
+      end
+
+      context 'もう一度スターを押したとき' do
+        it 'スターの横の数値が0になること' do
+          find(:css, "#like_pickup_tweet_#{@target.id}").click
+          sleep 1
+          find(:css, "#like_pickup_tweet_#{@target.id}").text.must_include("0")
+        end
       end
     end
   end
 
-  context 'ログインしているとき' do
+  context 'ログインしていないとき' do
     context 'スターを押したとき' do
-      it 'スターが黒くなること' do
-        skip
-      end
-
-      it 'スターの横の数値が1になること' do
-        skip
+      it 'スターの横の数値が0のままであること' do
+        find(:css, "#like_pickup_tweet_#{@target.id}").click
+        sleep 1
+        find(:css, "#like_pickup_tweet_#{@target.id}").text.must_include("0")
       end
     end
   end
