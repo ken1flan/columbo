@@ -4,6 +4,8 @@
 「うちのカミさんが…」と友人や同僚によくボヤくが、それは実はノロケのこと。
 そんな不思議な生態を集め、世の中に発信することで、世間の夫婦仲をより良くしようという、[サービス](http://my-wife-said.herokuapp.com/)。
 
+[![Code Climate](https://codeclimate.com/github/ken1flan/columbo/badges/gpa.svg)](https://codeclimate.com/github/ken1flan/columbo)[![Test Coverage](https://codeclimate.com/github/ken1flan/columbo/badges/coverage.svg)](https://codeclimate.com/github/ken1flan/columbo)
+[![Dependency Status](https://gemnasium.com/ken1flan/columbo.svg)](https://gemnasium.com/ken1flan/columbo)
 
 ## Quick start
 
