@@ -245,4 +245,17 @@ describe PickupTweet do
       end
     end
   end
+
+  describe '.is_bot?' do
+    PickupTweet::BOT_KEYWORDS.each do |keyword|
+      context "スクリーン名に#{keyword}が含まれているとき" do
+        it 'trueであること' do
+        end
+      end
+      context "スクリーン名に#{keyword}が含まれているとき" do
+        it 'trueであること' do
+        end
+      end
+    end
+  end
 end

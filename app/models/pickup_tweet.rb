@@ -8,6 +8,8 @@ class PickupTweet < ActiveRecord::Base
     "うちのカミさんが",
   ]
 
+  BOT_KEYWORDS = %w(bot ボット ぼっと)
+
   MAX_RECORDS = 1000
 
   def is_liked_by?(user)
@@ -65,5 +67,8 @@ class PickupTweet < ActiveRecord::Base
         pickup_tweet.update_attributes( attributes )
       end
       pickup_tweet
+    end
+
+    def self.is_bot?(tweet)
     end
 end
