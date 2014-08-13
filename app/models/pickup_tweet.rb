@@ -30,8 +30,10 @@ class PickupTweet < ActiveRecord::Base
     SEARCH_KEYWORDS.each do |keyword|
       tweets = client.search(keyword)
       tweets.each do |tweet|
-        pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, keyword)
-        PickupTweet.create_or_update(pickup_tweet_attrs)
+        unless is_bot?(tweet)
+          pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, keyword)
+          PickupTweet.create_or_update(pickup_tweet_attrs)
+        end
       end
     end
   end
@@ -70,5 +72,7 @@ class PickupTweet < ActiveRecord::Base
     end
 
     def self.is_bot?(tweet)
+      regex = BOT_KEYWORDS.map{|k| "(#{k})"}.join('|')
+      !!(tweet.user.name =~ /#{regex}/ || tweet.user.screen_name =~ /#{regex}/)
     end
 end
