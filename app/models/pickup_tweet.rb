@@ -8,6 +8,8 @@ class PickupTweet < ActiveRecord::Base
     "うちのカミさんが",
   ]
 
+  BOT_KEYWORDS = %w(bot ボット ぼっと)
+
   MAX_RECORDS = 1000
 
   def is_liked_by?(user)
@@ -28,8 +30,10 @@ class PickupTweet < ActiveRecord::Base
     SEARCH_KEYWORDS.each do |keyword|
       tweets = client.search(keyword)
       tweets.each do |tweet|
-        pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, keyword)
-        PickupTweet.create_or_update(pickup_tweet_attrs)
+        unless is_bot?(tweet)
+          pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, keyword)
+          PickupTweet.create_or_update(pickup_tweet_attrs)
+        end
       end
     end
   end
@@ -65,5 +69,10 @@ class PickupTweet < ActiveRecord::Base
         pickup_tweet.update_attributes( attributes )
       end
       pickup_tweet
+    end
+
+    def self.is_bot?(tweet)
+      regex = BOT_KEYWORDS.map{|k| "(#{k})"}.join('|')
+      !!(tweet.user.name =~ /#{regex}/ || tweet.user.screen_name =~ /#{regex}/)
     end
 end
