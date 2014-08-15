@@ -61,7 +61,7 @@ class PickupTweet < ActiveRecord::Base
     end
 
     def self.create_or_update(attributes)
-      pickup_tweet = PickupTweet.find_by(tweet_id: attributes[:tweet_id])
+      pickup_tweet = PickupTweet.find_by(tweet_id: attributes[:tweet_id].to_s)
       if(pickup_tweet.blank?)
         pickup_tweet = new( attributes )
         pickup_tweet.save!
