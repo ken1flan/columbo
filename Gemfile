@@ -4,7 +4,8 @@ ruby "2.1.1"
 gem 'rails', '4.1.4'
 gem 'sass-rails', '~> 4.0.3'
 gem 'compass-rails'
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
+#gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
+gem 'twitter-bootstrap-rails'
 gem 'zurui-sass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -41,7 +42,7 @@ group :test do
   gem 'minitest-spec-rails' # describeやitが使える
   gem 'minitest-matchers'   # いろいろなmatcher
   gem 'minitest-reporters'  # minitestの実行結果をキレイに見せる
-  gem 'capybara'            # integration testでブラウザ上の操作を記述できるようにする
+  gem 'capybara', '2.2.1'   # integration testでブラウザ上の操作を記述できるようにする
   gem 'poltergeist'         # capybaraのjsdriver。phantomjsを使う。
   gem 'database_cleaner'    # テスト時にdbのクリーンアップする方法を選択しやすくする。
 end
