@@ -4,7 +4,6 @@ ruby "2.1.1"
 gem 'rails', '4.1.4'
 gem 'sass-rails', '~> 4.0.3'
 gem 'compass-rails'
-#gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
 gem 'twitter-bootstrap-rails'
 gem 'zurui-sass-rails'
 gem 'uglifier', '>= 1.3.0'
@@ -28,6 +27,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'cancancan', '~> 1.9'
 
 # いいね
 gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4'
