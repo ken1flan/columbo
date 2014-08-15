@@ -46,6 +46,7 @@ GEM
     byebug (2.7.0)
       columnize (~> 0.3)
       debugger-linecache (~> 1.2)
+    cancancan (1.9.2)
     capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -280,6 +281,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-reputation-system!
   better_errors
+  cancancan (~> 1.9)
   capybara (= 2.2.1)
   coffee-rails (~> 4.0.0)
   compass-rails
