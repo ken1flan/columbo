@@ -245,4 +245,44 @@ describe PickupTweet do
       end
     end
   end
+
+  describe '.is_bot?' do
+    PickupTweet::BOT_KEYWORDS.each do |keyword|
+      before do
+        @attrs = {
+          id: 987654321,
+          text: "てきすとてきすと",
+          user:
+          {
+            id: 123456789,
+            name: "test_user_name",
+            screen_name:"test_user_screen_name"
+          }
+        }
+      end
+
+      [:name, :screen_name].each do |attribute_name|
+        context "#{attribute_name}に#{keyword}が含まれているとき" do
+          before do
+            @attrs[:user][attribute_name] = "aa#{keyword}bb"
+            @tweet = Twitter::Tweet.new(@attrs)
+          end
+
+          it 'trueであること' do
+            PickupTweet.is_bot?(@tweet).must_equal true
+          end
+        end
+
+        context "screen_name, nameに#{keyword}が含まれていないとき" do
+          before do
+            @tweet = Twitter::Tweet.new(@attrs)
+          end
+
+          it 'falseであること' do
+            PickupTweet.is_bot?(@tweet).must_equal false
+          end
+        end
+      end
+    end
+  end
 end
