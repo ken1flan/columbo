@@ -29,5 +29,41 @@ git clone git@github.com:ken1flan/columbo.git
 cd columbo
 bundle install
 rake db:migrate
+rake twitter:pickup_by_keyword
 rails s
+```
+
+## 運用
+
+### ツイート関連
+#### ツイートを取得する
+```
+rake twitter:pickup_by_keyword
+```
+
+#### 古いツイートを削除する
+```
+rake twitter:housekeep
+```
+
+### サイト管理
+
+#### ユーザの一覧
+```
+rake user:list
+```
+
+#### 管理者
+##### 設定
+指定したユーザを管理者に設定する。
+```
+export COLUMBO_ADMINS=2,4  # ユーザのIDをカンマ区切りで。
+rake user:set_admins
+```
+
+##### 解除
+指定したユーザを管理者から元に戻す。
+```
+export COLUMBO_ADMINS=2,4  # ユーザのIDをカンマ区切りで。
+rake user:unset_admins
 ```
