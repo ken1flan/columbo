@@ -46,6 +46,13 @@ class PickupTweet < ActiveRecord::Base
     end
   end
 
+  def self.cleanup
+    all.each do |pickup_tweet|
+      tweet = Twitter::Tweet.new(eval(pickup_tweet.attrs))
+      pickup_tweet.delete if is_bot?(tweet)
+    end
+  end
+
   private
     def self.get_attributes_from_tweet(tweet, keyword)
       { attrs: tweet.attrs.to_s,
@@ -73,6 +80,6 @@ class PickupTweet < ActiveRecord::Base
 
     def self.is_bot?(tweet)
       regex = BOT_KEYWORDS.map{|k| "(#{k})"}.join('|')
-      !!(tweet.user.name =~ /#{regex}/ || tweet.user.screen_name =~ /#{regex}/)
+      !!(tweet.user.name =~ /#{regex}/i || tweet.user.screen_name =~ /#{regex}/)
     end
 end
