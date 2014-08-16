@@ -152,6 +152,24 @@ describe PickupTweet do
     end
   end
 
+  describe '.cleanup' do
+    before do
+      @normal = create(:pickup_tweet)
+    end
+
+    context 'botのツイートがあったとき' do
+      before do
+        @bot = create(:pickup_tweet, :bot)
+      end
+
+      it '削除されていること' do
+        all = PickupTweet.all
+        all.include?(@bot).wont_equal false
+        all.include?(@normal).must_equal true
+      end
+    end
+  end
+
   describe '.get_attributes_from_tweet(tweet, keyword)' do
     context 'tweetとkeywordが指定されているとき' do
       before do
