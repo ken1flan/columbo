@@ -30,6 +30,8 @@ class ActionDispatch::IntegrationTest
   Capybara.current_driver = :poltergeist
   self.use_transactional_fixtures = false
 
+  require 'integration_test_helper'
+
   before do
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start

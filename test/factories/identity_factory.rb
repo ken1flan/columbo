@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :identity do
     user_id nil
     provider 'twitter'
-    uid 1
+    uid { "#{rand(100000)}" }
   end
 
   trait :twitter do
