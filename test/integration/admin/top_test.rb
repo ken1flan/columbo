@@ -17,7 +17,7 @@ describe '管理者トップ Integration' do
     before do
       @user = create(:user)
       @identity = create(:identity, user_id: @user.id, provider: 'twitter')
-      login2('twitter', @identity.uid)
+      login('twitter', @identity.uid)
     end
 
     it '404 not foundであること' do
@@ -31,8 +31,7 @@ describe '管理者トップ Integration' do
     before do
       @user = create(:user, :admin)
       @identity = create(:identity, user_id: @user.id, provider: 'twitter')
-      login2('twitter', @identity.uid)
-      binding.pry
+      login('twitter', @identity.uid)
     end
 
     it 'status_codeが200であること' do

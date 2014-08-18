@@ -1,5 +1,5 @@
-def login2(provider, uid)
-  OmniAuth.config.mock_auth[provider] = OmniAuth::AuthHash.new({
+def login(provider, uid)
+  OmniAuth.config.mock_auth[provider.to_sym] = OmniAuth::AuthHash.new({
     provider: provider,
     uid: uid,
     extra: {
