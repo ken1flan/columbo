@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     get 'pickup_tweets/:id/:up_down' => 'reputation#pickup_tweet'
   end
 
+  # admin
+  namespace :admin do
+    get '/' => 'top#index'
+  end
+  
+  # for poor man's cron
   get 'cron/pickup_tweets' => 'cron#pickup_tweets'
   get 'cron/housekeep_tweets' => 'cron#housekeep_tweets'
   
