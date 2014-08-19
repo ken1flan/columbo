@@ -1,0 +1,33 @@
+<%= form_for(@excluded_twitter_user) do |f| %>
+  <% if @excluded_twitter_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@excluded_twitter_user.errors.count, "error") %> prohibited this excluded_twitter_user from being saved:</h2>
+
+      <ul>
+      <% @excluded_twitter_user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :uid %><br>
+    <%= f.text_field :uid %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :screen_name %><br>
+    <%= f.text_field :screen_name %>
+  </div>
+  <div class="field">
+    <%= f.label :memo %><br>
+    <%= f.text_field :memo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

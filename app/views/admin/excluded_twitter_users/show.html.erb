@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uid:</strong>
+  <%= @excluded_twitter_user.uid %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @excluded_twitter_user.name %>
+</p>
+
+<p>
+  <strong>Screen name:</strong>
+  <%= @excluded_twitter_user.screen_name %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @excluded_twitter_user.memo %>
+</p>
+
+<%= link_to 'Edit', edit_excluded_twitter_user_path(@excluded_twitter_user) %> |
+<%= link_to 'Back', excluded_twitter_users_path %>

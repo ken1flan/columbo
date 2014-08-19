@@ -1,0 +1,31 @@
+<h1>Listing excluded_twitter_users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Name</th>
+      <th>Screen name</th>
+      <th>Memo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @excluded_twitter_users.each do |excluded_twitter_user| %>
+      <tr>
+        <td><%= excluded_twitter_user.uid %></td>
+        <td><%= excluded_twitter_user.name %></td>
+        <td><%= excluded_twitter_user.screen_name %></td>
+        <td><%= excluded_twitter_user.memo %></td>
+        <td><%= link_to 'Show', excluded_twitter_user %></td>
+        <td><%= link_to 'Edit', edit_excluded_twitter_user_path(excluded_twitter_user) %></td>
+        <td><%= link_to 'Destroy', excluded_twitter_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Excluded twitter user', new_admin_excluded_twitter_user_path %>

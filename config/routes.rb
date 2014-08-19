@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks' }
   root 'top#index'
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   # admin
   namespace :admin do
     get '/' => 'top#index'
+    resources :excluded_twitter_users
   end
   
   # for poor man's cron

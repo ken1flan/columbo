@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815120053) do
+ActiveRecord::Schema.define(version: 20140819000857) do
+
+  create_table "excluded_twitter_users", force: true do |t|
+    t.string   "uid"
+    t.string   "name"
+    t.string   "screen_name"
+    t.string   "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "identities", force: true do |t|
     t.integer  "user_id"
