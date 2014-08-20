@@ -28,8 +28,8 @@ class Admin::ExcludedTwitterUsersController < ApplicationController
 
     respond_to do |format|
       if @excluded_twitter_user.save
-        format.html { redirect_to @excluded_twitter_user, notice: 'Excluded twitter user was successfully created.' }
-        format.json { render :show, status: :created, location: @excluded_twitter_user }
+        format.html { redirect_to admin_excluded_twitter_user_path(id: @excluded_twitter_user.id), notice: 'Excluded twitter user was successfully created.' }
+        format.json { render :show, status: :created, location: admin_excluded_twitter_user_path(id: @excluded_twitter_user.id) }
       else
         format.html { render :new }
         format.json { render json: @excluded_twitter_user.errors, status: :unprocessable_entity }

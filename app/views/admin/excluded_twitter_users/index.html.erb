@@ -1,4 +1,4 @@
-<h1>Listing excluded_twitter_users</h1>
+<h1>除外Twitterユーザー</h1>
 
 <table>
   <thead>
@@ -18,9 +18,9 @@
         <td><%= excluded_twitter_user.name %></td>
         <td><%= excluded_twitter_user.screen_name %></td>
         <td><%= excluded_twitter_user.memo %></td>
-        <td><%= link_to 'Show', excluded_twitter_user %></td>
-        <td><%= link_to 'Edit', edit_excluded_twitter_user_path(excluded_twitter_user) %></td>
-        <td><%= link_to 'Destroy', excluded_twitter_user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', admin_excluded_twitter_user_path(excluded_twitter_user) %></td>
+        <td><%= link_to 'Edit', edit_admin_excluded_twitter_user_path(excluded_twitter_user) %></td>
+        <td><%= link_to 'Destroy', admin_excluded_twitter_user_path(excluded_twitter_user, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
       </tr>
     <% end %>
   </tbody>
