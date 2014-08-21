@@ -28,7 +28,7 @@ class Admin::ExcludedTwitterUsersController < ApplicationController
 
     respond_to do |format|
       if @excluded_twitter_user.save
-        format.html { redirect_to admin_excluded_twitter_user_path(id: @excluded_twitter_user.id), notice: 'Excluded twitter user was successfully created.' }
+        format.html { redirect_to [:admin, @excluded_twitter_user], notice: 'Excluded twitter user was successfully created.' }
         format.json { render :show, status: :created, location: admin_excluded_twitter_user_path(id: @excluded_twitter_user.id) }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class Admin::ExcludedTwitterUsersController < ApplicationController
   def update
     respond_to do |format|
       if @excluded_twitter_user.update(excluded_twitter_user_params)
-        format.html { redirect_to @excluded_twitter_user, notice: 'Excluded twitter user was successfully updated.' }
+        format.html { redirect_to [:admin, @excluded_twitter_user], notice: 'Excluded twitter user was successfully updated.' }
         format.json { render :show, status: :ok, location: @excluded_twitter_user }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class Admin::ExcludedTwitterUsersController < ApplicationController
   def destroy
     @excluded_twitter_user.destroy
     respond_to do |format|
-      format.html { redirect_to excluded_twitter_users_url, notice: 'Excluded twitter user was successfully destroyed.' }
+      format.html { redirect_to admin_excluded_twitter_users_url, notice: 'Excluded twitter user was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
