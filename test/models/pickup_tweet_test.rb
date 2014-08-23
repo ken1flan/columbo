@@ -279,27 +279,56 @@ describe PickupTweet do
         }
       end
 
-      [:name, :screen_name].each do |attribute_name|
-        context "#{attribute_name}に#{keyword}が含まれているとき" do
+      describe '.is_bot?' do
+        [:name, :screen_name].each do |attribute_name|
+          context "#{attribute_name}に#{keyword}が含まれているとき" do
+            before do
+              @attrs[:user][attribute_name] = "aa#{keyword}bb"
+              @tweet = Twitter::Tweet.new(@attrs)
+            end
+
+            it 'trueであること' do
+              PickupTweet.is_non_pickup_tweet?(@tweet).must_equal true
+            end
+          end
+
+          context "screen_name, nameに#{keyword}が含まれていないとき" do
+            before do
+              @tweet = Twitter::Tweet.new(@attrs)
+            end
+
+            it 'falseであること' do
+              PickupTweet.is_non_pickup_tweet?(@tweet).must_equal false
+            end
+          end
+        end
+      end
+
+      describe '.is_excluded_twitter_user?' do
+        before do
+          @excluded_twitter_user = create(:excluded_twitter_user)
+        end
+
+        context 'excluded_twitter_userのuidと等しいツイートのとき' do
           before do
-            @attrs[:user][attribute_name] = "aa#{keyword}bb"
+            @attrs[:user][:id] = @excluded_twitter_user.uid
             @tweet = Twitter::Tweet.new(@attrs)
           end
 
           it 'trueであること' do
-            PickupTweet.is_bot?(@tweet).must_equal true
+            PickupTweet.is_non_pickup_tweet?(@tweet).must_equal true
           end
         end
 
-        context "screen_name, nameに#{keyword}が含まれていないとき" do
+        context 'excluded_twitter_userのuidと等しくないツイートのとき' do
           before do
             @tweet = Twitter::Tweet.new(@attrs)
           end
 
           it 'falseであること' do
-            PickupTweet.is_bot?(@tweet).must_equal false
+            PickupTweet.is_non_pickup_tweet?(@tweet).must_equal false
           end
-        end
+        end 
       end
     end
   end
