@@ -264,7 +264,7 @@ describe PickupTweet do
     end
   end
 
-  describe '.is_bot?' do
+  describe '.is_non_pickup_tweet?' do
     PickupTweet::BOT_KEYWORDS.each do |keyword|
       before do
         @attrs = {
