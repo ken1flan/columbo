@@ -1,4 +1,4 @@
-class Admin::ExcludedTwitterUsersController < ApplicationController
+class Admin::ExcludedTwitterUsersController < Admin::AdminController
   before_action :set_excluded_twitter_user, only: [:show, :edit, :update, :destroy]
 
   # GET /excluded_twitter_users
