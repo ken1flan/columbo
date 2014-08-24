@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819000857) do
+ActiveRecord::Schema.define(version: 20140824052833) do
 
   create_table "excluded_twitter_users", force: true do |t|
     t.string   "uid"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140819000857) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "keyword"
+    t.string   "tweet_user_uid"
   end
 
   add_index "pickup_tweets", ["tweet_at"], name: "index_pickup_tweets_on_tweet_at"
