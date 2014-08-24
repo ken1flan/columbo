@@ -61,6 +61,7 @@ class PickupTweet < ActiveRecord::Base
         tweet_at: tweet.created_at,
         truncated: tweet.truncated?,
         tweet_user_image_url: tweet.user.profile_image_url.to_s,
+        tweet_user_uid: tweet.user.id,
         tweet_user_name: tweet.user.name,
         tweet_user_screen_name: tweet.user.screen_name,
         keyword: keyword

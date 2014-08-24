@@ -197,6 +197,7 @@ describe PickupTweet do
         @result[:truncated].must_equal(@tweet.truncated?)
         # TODO: profile_image_urlをどうやって指定するか調べる
         # @result[:tweet_user_image_url].must_equal(@tweet.user.profile_image_url)
+        @result[:tweet_user_uid].must_equal(@tweet.user.id)
         @result[:tweet_user_name].must_equal(@tweet.user.name)
         @result[:tweet_user_screen_name].must_equal(@tweet.user.screen_name)
         @result[:keyword].must_equal(@keyword)
