@@ -1,0 +1,32 @@
+<h1>Listing excluded_twitter_users</h1>
+
+<%= link_to 'New Excluded twitter user', new_admin_excluded_twitter_user_path, class: 'btn btn-warning', id: 'button_add_new' %>
+<br>
+<br>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Name</th>
+      <th>Screen name</th>
+      <th>Memo</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @excluded_twitter_users.each do |excluded_twitter_user| %>
+      <tr id="summary_<%= excluded_twitter_user.id %>">
+        <td><%= excluded_twitter_user.uid %></td>
+        <td><%= excluded_twitter_user.name %></td>
+        <td><%= excluded_twitter_user.screen_name %></td>
+        <td><%= excluded_twitter_user.memo %></td>
+        <td>
+          <%= link_to 'Show', admin_excluded_twitter_user_path(excluded_twitter_user), class: "btn btn-info", id: "button_show_#{excluded_twitter_user.id}" %>
+          <%= link_to 'Edit', edit_admin_excluded_twitter_user_path(excluded_twitter_user) , class: "btn btn-warning", id: "button_edit_#{excluded_twitter_user.id}" %>
+          <%= link_to 'Destroy', [:admin, excluded_twitter_user], method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger", id: "button_destroy_#{excluded_twitter_user.id}" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
