@@ -12,6 +12,7 @@ class PickupTweet < ActiveRecord::Base
 
   MAX_RECORDS = 1000
 
+  # TODO: isを取る
   def is_liked_by?(user)
     evaluation = evaluations.where(source_id: user.id).first
     evaluation.blank? || evaluation.value == 0 ? false : true
@@ -30,7 +31,7 @@ class PickupTweet < ActiveRecord::Base
     SEARCH_KEYWORDS.each do |keyword|
       tweets = client.search(keyword)
       tweets.each do |tweet|
-        unless is_non_pickup_tweet?(tweet)
+        unless non_pickup_tweet?(tweet)
           pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, keyword)
           PickupTweet.create_or_update(pickup_tweet_attrs)
         end
@@ -49,7 +50,7 @@ class PickupTweet < ActiveRecord::Base
   def self.cleanup
     all.each do |pickup_tweet|
       tweet = Twitter::Tweet.new(eval(pickup_tweet.attrs))
-      pickup_tweet.delete if is_non_pickup_tweet?(tweet)
+      pickup_tweet.delete if non_pickup_tweet?(tweet)
     end
   end
 
@@ -79,16 +80,16 @@ class PickupTweet < ActiveRecord::Base
       pickup_tweet
     end
 
-    def self.is_non_pickup_tweet?(tweet)
-      is_bot?(tweet) || is_excluded_twitter_user?(tweet)
+    def self.non_pickup_tweet?(tweet)
+      bot_tweet?(tweet) || excluded_twitter_user_tweet?(tweet)
     end
 
-    def self.is_bot?(tweet)
+    def self.bot_tweet?(tweet)
       regex = BOT_KEYWORDS.map{|k| "(#{k})"}.join('|')
       !!(tweet.user.name =~ /#{regex}/i || tweet.user.screen_name =~ /#{regex}/)
     end
 
-    def self.is_excluded_twitter_user?(tweet)
+    def self.excluded_twitter_user_tweet?(tweet)
       ids = ExcludedTwitterUser.pluck(:uid)
       ids.include? tweet.user.id
     end

@@ -62,13 +62,13 @@ class Admin::ExcludedTwitterUsersController < Admin::AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_excluded_twitter_user
-      @excluded_twitter_user = ExcludedTwitterUser.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_excluded_twitter_user
+    @excluded_twitter_user = ExcludedTwitterUser.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def excluded_twitter_user_params
-      params.require(:excluded_twitter_user).permit(:uid, :name, :screen_name, :memo)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def excluded_twitter_user_params
+    params.require(:excluded_twitter_user).permit(:uid, :name, :screen_name, :memo)
+  end
 end
