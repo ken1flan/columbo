@@ -1,0 +1,13 @@
+<% if user_signed_in? && current_user.admin? %> 
+  <% memo = "by #{current_user.id} at #{Time.zone.now}" %>
+  <% excluded_twitter_user = ExcludedTwitterUser.new( uid: uid, name: name, screen_name: screen_name, memo: memo ) %>
+  <%= form_for([:admin, excluded_twitter_user], remote: true, html: {style: "display:inline;"}) do |f| %>
+    <%= f.hidden_field :uid %>
+    <%= f.hidden_field :name %>
+    <%= f.hidden_field :screen_name %>
+    <%= f.hidden_field :memo %>
+    <button type="submit" class="removePickupTweetUser btn btn-default btn-xs">
+      <span class="star glyphicon glyphicon-remove-circle"></span>
+    </button>
+  <% end %>
+<% end %>

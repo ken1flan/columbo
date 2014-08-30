@@ -6,11 +6,7 @@
     <div class="media-body">
       <div class="media-hedding">
         <%= pickup_tweet.tweet_user_name %>
-        <% if user_signed_in? && current_user.admin? %> 
-          <button id="remove_pickup_tweet_user_<%= pickup_tweet.id %>" type="button" class="removePickupTweetUser btn btn-default btn-xs">
-            <span class="star glyphicon glyphicon-remove-circle"></span>
-          </button>
-        <% end %>
+        <%= render("admin/excluded_twitter_users/create_button", uid: pickup_tweet.tweet_user_uid, name: pickup_tweet.tweet_user_name, screen_name: pickup_tweet.tweet_user_screen_name) %>
       </div>
       <div class="media">
         <%= emphasize_keyword(pickup_tweet.text, pickup_tweet.keyword) %>
