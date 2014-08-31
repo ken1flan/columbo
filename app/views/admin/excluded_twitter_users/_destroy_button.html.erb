@@ -1,0 +1,6 @@
+<% excluded_twitter_user = ExcludedTwitterUser.find_by(uid: uid) %>
+<%= link_to [:admin, excluded_twitter_user], method: :delete, remote: true do %>
+  <button type="submit" class="removePickupTweetUser btn btn-inverse btn-xs">
+    <span class="star glyphicon glyphicon-remove-circle"></span>
+  </button>
+<% end %>

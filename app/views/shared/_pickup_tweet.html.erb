@@ -6,7 +6,9 @@
     <div class="media-body">
       <div class="media-hedding">
         <%= pickup_tweet.tweet_user_name %>
-        <%= render("admin/excluded_twitter_users/create_button", uid: pickup_tweet.tweet_user_uid, name: pickup_tweet.tweet_user_name, screen_name: pickup_tweet.tweet_user_screen_name) %>
+        <span class="create_excluded_twitter_user_<%= pickup_tweet.tweet_user_uid %>">
+          <%= render("admin/excluded_twitter_users/operate_button", uid: pickup_tweet.tweet_user_uid, name: pickup_tweet.tweet_user_name, screen_name: pickup_tweet.tweet_user_screen_name) %>
+        </span>
       </div>
       <div class="media">
         <%= emphasize_keyword(pickup_tweet.text, pickup_tweet.keyword) %>

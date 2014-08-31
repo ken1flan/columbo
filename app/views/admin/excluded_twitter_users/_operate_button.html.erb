@@ -1,0 +1,7 @@
+<% if user_signed_in? && current_user.admin? %> 
+  <% if ExcludedTwitterUser.find_by(uid: uid).blank? %>
+    <%= render("admin/excluded_twitter_users/create_button", uid: uid, name: name, screen_name: screen_name) %>
+  <% else %>
+    <%= render("admin/excluded_twitter_users/destroy_button", uid: uid) %>
+ <% end %>
+<% end %>
