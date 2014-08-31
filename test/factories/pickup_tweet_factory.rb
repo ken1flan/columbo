@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :pickup_tweet do
-    attrs                   {"
-      id: #{rand(100000)},
+    attrs                   {"{
+      id: '#{rand(100000)}',
       text: 'てきすとてきすと',
       user:
         {
@@ -9,7 +9,7 @@ FactoryGirl.define do
           name: 'test_user_name',
           screen_name:'test_user_screen_name'
         }
-    "}
+    }"}
     tweet_id                { rand(100000).to_s }
     text                    { "testtext#{tweet_id}" }
     truncated               false
@@ -26,7 +26,7 @@ FactoryGirl.define do
   end
 
   trait :bot do
-    attrs {"
+    attrs {"{
       id: #{rand(100000)},
       text: 'てきすとてきすと',
       user:
@@ -35,6 +35,6 @@ FactoryGirl.define do
           name: 'test_bot_user_name',
           screen_name:'test_bot_user_screen_name'
         }
-    "}
+    }"}
   end
 end
