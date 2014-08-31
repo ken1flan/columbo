@@ -11,12 +11,13 @@ FactoryGirl.define do
         }
     "}
     tweet_id                { rand(100000).to_s }
-    text                    "testtext"
+    text                    { "testtext#{tweet_id}" }
     truncated               false
     tweet_at                { 1.day.ago }
     tweet_user_image_url    "http://google.com"
-    tweet_user_name         "test_user_name"
-    tweet_user_screen_name  "test_screen_name"
+    tweet_user_uid          { rand(100000).to_s }
+    tweet_user_name         { "test_user_name#{tweet_user_uid}" }
+    tweet_user_screen_name  { "test_screen_name#{tweet_user_uid}" }
     keyword                 "test_keyword"
   end
 
