@@ -1,0 +1,2 @@
+$(".create_excluded_twitter_user_<%= @excluded_twitter_user.uid %>").empty();
+$(".create_excluded_twitter_user_<%= @excluded_twitter_user.uid %>").append('<%= j render("admin/excluded_twitter_users/destroy_button", uid: @excluded_twitter_user.uid) %>');

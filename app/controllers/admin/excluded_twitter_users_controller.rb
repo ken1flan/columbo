@@ -30,6 +30,7 @@ class Admin::ExcludedTwitterUsersController < Admin::AdminController
       if @excluded_twitter_user.save
         format.html { redirect_to [:admin, @excluded_twitter_user], notice: 'Excluded twitter user was successfully created.' }
         format.json { render :show, status: :created, location: admin_excluded_twitter_user_path(id: @excluded_twitter_user.id) }
+        format.js { render :create }
       else
         format.html { render :new }
         format.json { render json: @excluded_twitter_user.errors, status: :unprocessable_entity }
@@ -54,10 +55,12 @@ class Admin::ExcludedTwitterUsersController < Admin::AdminController
   # DELETE /excluded_twitter_users/1
   # DELETE /excluded_twitter_users/1.json
   def destroy
+    @deleted_excluded_twitter_user = @excluded_twitter_user.dup
     @excluded_twitter_user.destroy
     respond_to do |format|
       format.html { redirect_to admin_excluded_twitter_users_url, notice: 'Excluded twitter user was successfully destroyed.' }
       format.json { head :no_content }
+      format.js { render :destroy }
     end
   end
 

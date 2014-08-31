@@ -2,7 +2,7 @@ require 'test_helper'
 
 describe 'トップページ Integration' do
   before do
-    create_list(:pickup_tweet, 10)
+    @pickup_tweets = create_list(:pickup_tweet, 10)
     @target = create(:pickup_tweet)
     visit root_path
   end
@@ -11,7 +11,7 @@ describe 'トップページ Integration' do
     page.text.must_include(@target.text)
   end
 
-  context 'ログインしているとき' do
+  context '一般ユーザでログインしているとき' do
     before do
       OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
         provider: 'twitter',
@@ -53,6 +53,41 @@ describe 'トップページ Integration' do
         find(:css, "#like_pickup_tweet_#{@target.id}").click
         sleep 1
         find(:css, "#like_pickup_tweet_#{@target.id}").text.must_include("0")
+      end
+    end
+  end
+
+  context "管理者ユーザでログインしているとき" do
+    before do
+      @user = create(:user, :admin)
+      @identity = create(:identity, user_id: @user.id, provider: 'twitter')
+      login('twitter', @identity.uid)
+    end
+
+    context "除外ツイッターユーザボタンを押したとき" do
+      before do
+        @pickup_tweet = @pickup_tweets.sample
+        find(".button_create_excluded_twitter_user_#{@pickup_tweet.tweet_user_uid}").click
+      end
+
+      it "除外Twitter管理ページに名前があること" do
+        visit admin_excluded_twitter_users_path
+        sleep 1
+        page.text.must_include @pickup_tweet.tweet_user_uid
+        page.text.must_include @pickup_tweet.tweet_user_name
+      end
+
+      context "解除ボタンを押したとき" do
+        before do
+          find(".button_destroy_excluded_twitter_user_#{@pickup_tweet.tweet_user_uid}").click
+        end
+
+        it "除外Twitter管理ページに名前がないこと" do
+          visit admin_excluded_twitter_users_path
+          sleep 1
+          page.text.wont_include @pickup_tweet.tweet_user_uid
+          page.text.wont_include @pickup_tweet.tweet_user_name
+        end
       end
     end
   end
