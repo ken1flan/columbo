@@ -1,15 +1,5 @@
 FactoryGirl.define do
   factory :pickup_tweet do
-    attrs                   {"{
-      id: '#{rand(100000)}',
-      text: 'てきすとてきすと',
-      user:
-        {
-          id: #{rand(100000)},
-          name: 'test_user_name',
-          screen_name:'test_user_screen_name'
-        }
-    }"}
     tweet_id                { rand(100000).to_s }
     text                    { "testtext#{tweet_id}" }
     truncated               false
@@ -19,6 +9,16 @@ FactoryGirl.define do
     tweet_user_name         { "test_user_name#{tweet_user_uid}" }
     tweet_user_screen_name  { "test_screen_name#{tweet_user_uid}" }
     keyword                 "test_keyword"
+    attrs                   {"{
+      id: '#{rand(100000)}',
+      text: 'てきすとてきすと',
+      user:
+        {
+          id: #{tweet_user_uid},
+          name: 'test_user_name',
+          screen_name:'test_user_screen_name'
+        }
+    }"}
   end
 
   trait :truncated do

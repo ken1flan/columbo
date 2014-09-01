@@ -91,6 +91,6 @@ class PickupTweet < ActiveRecord::Base
 
     def self.excluded_twitter_user_tweet?(tweet)
       ids = ExcludedTwitterUser.pluck(:uid)
-      ids.include? tweet.user.id
+      ids.include? tweet.user.id.to_s
     end
 end
