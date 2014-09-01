@@ -163,8 +163,23 @@ describe PickupTweet do
       end
 
       it "削除されていること" do
+        PickupTweet.cleanup
         all = PickupTweet.all
-        all.include?(@bot).wont_equal false
+        all.include?(@bot).must_equal false
+        all.include?(@normal).must_equal true
+      end
+    end
+
+    context "除外twitter ユーザのツイートがあったとき" do
+      before do
+        @excluded_twitter_user = create(:excluded_twitter_user)
+        @excluded = create(:pickup_tweet, tweet_user_uid: @excluded_twitter_user.uid)
+      end
+
+      it "削除されていること" do
+        PickupTweet.cleanup
+        all = PickupTweet.all
+        all.include?(@excluded).must_equal false
         all.include?(@normal).must_equal true
       end
     end
