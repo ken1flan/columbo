@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902115929) do
+ActiveRecord::Schema.define(version: 20140902234650) do
 
   create_table "excluded_twitter_users", force: true do |t|
     t.string   "uid"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140902115929) do
 
   create_table "pickup_keywords", force: true do |t|
     t.string   "pickup_keyword"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,8 +52,10 @@ ActiveRecord::Schema.define(version: 20140902115929) do
     t.datetime "updated_at"
     t.string   "keyword"
     t.string   "tweet_user_uid"
+    t.integer  "pickup_keyword_id"
   end
 
+  add_index "pickup_tweets", ["pickup_keyword_id"], name: "index_pickup_tweets_on_pickup_keyword_id"
   add_index "pickup_tweets", ["tweet_at"], name: "index_pickup_tweets_on_tweet_at"
   add_index "pickup_tweets", ["tweet_id"], name: "index_pickup_tweets_on_tweet_id"
   add_index "pickup_tweets", ["tweet_user_name"], name: "index_pickup_tweets_on_tweet_user_name"
@@ -64,6 +67,8 @@ ActiveRecord::Schema.define(version: 20140902115929) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pickup_tweets_per_days", ["pickup_keyword_id"], name: "index_pickup_tweets_per_days_on_pickup_keyword_id"
 
   create_table "rs_evaluations", force: true do |t|
     t.string   "reputation_name"
@@ -108,12 +113,6 @@ ActiveRecord::Schema.define(version: 20140902115929) do
   add_index "rs_reputations", ["reputation_name", "target_id", "target_type"], name: "index_rs_reputations_on_reputation_name_and_target", unique: true
   add_index "rs_reputations", ["reputation_name"], name: "index_rs_reputations_on_reputation_name"
   add_index "rs_reputations", ["target_id", "target_type"], name: "index_rs_reputations_on_target_id_and_target_type"
-
-  create_table "statitics", force: true do |t|
-    t.date    "target_date"
-    t.integer "target_type_id"
-    t.decimal "target_value"
-  end
 
   create_table "users", force: true do |t|
     t.string   "name"

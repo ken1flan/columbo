@@ -7,5 +7,7 @@ class CreatePickupTweetsPerDays < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :pickup_tweets_per_days, :pickup_keyword_id
   end
 end
