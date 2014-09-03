@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'top#index'
     resources :excluded_twitter_users
+    resources :pickup_keywords
   end
   
   # for poor man's cron
