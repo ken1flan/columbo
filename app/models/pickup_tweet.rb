@@ -4,10 +4,6 @@ class PickupTweet < ActiveRecord::Base
   default_scope { order('tweet_at DESC') }
   scope :can_display, ->{ where(truncated: false) }
 
-  SEARCH_KEYWORDS = [
-    "うちのカミさんが",
-  ]
-
   BOT_KEYWORDS = %w(bot ボット ぼっと)
 
   MAX_RECORDS = 1000
@@ -55,7 +51,7 @@ class PickupTweet < ActiveRecord::Base
   end
 
   private
-    def self.get_attributes_from_tweet(tweet, keyword)
+    def self.get_attributes_from_tweet(tweet, pickup_keyword)
       { attrs: tweet.attrs.to_s,
         tweet_id: tweet.id,
         text: tweet.text,
@@ -65,7 +61,8 @@ class PickupTweet < ActiveRecord::Base
         tweet_user_uid: tweet.user.id,
         tweet_user_name: tweet.user.name,
         tweet_user_screen_name: tweet.user.screen_name,
-        keyword: keyword
+        keyword: pickup_keyword.pickup_keyword,
+        pickup_keyword_id: pickup_keyword.id
       }
     end
 

@@ -2,6 +2,11 @@
 
 FactoryGirl.define do
   factory :pickup_keyword do
-    pickup_keyword "MyString"
+    sequence :pickup_keyword do |n|
+      "pickup_keyword#{n}"
+    end
+    sequence :slug do |n|
+      "slug#{n}"
+    end
   end
 end

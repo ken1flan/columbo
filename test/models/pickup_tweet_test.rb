@@ -185,8 +185,8 @@ describe PickupTweet do
     end
   end
 
-  describe ".get_attributes_from_tweet(tweet, keyword)" do
-    context "tweetとkeywordが指定されているとき" do
+  describe ".get_attributes_from_tweet(tweet, pickup_keyword)" do
+    context "tweetとpickup_keywordが指定されているとき" do
       before do
         @tweet_attrs = {
           id: 100,
@@ -200,9 +200,9 @@ describe PickupTweet do
           }
         }
         @tweet = Twitter::Tweet.new(@tweet_attrs)
-        @keyword = "うちのカミさんが"
+        @pickup_keyword = create(:pickup_keyword)
 
-        @result = PickupTweet.get_attributes_from_tweet(@tweet, @keyword)
+        @result = PickupTweet.get_attributes_from_tweet(@tweet, @pickup_keyword)
       end
 
       it "tweet内容とkeywordが設定されていること" do
@@ -215,7 +215,7 @@ describe PickupTweet do
         @result[:tweet_user_uid].must_equal(@tweet.user.id)
         @result[:tweet_user_name].must_equal(@tweet.user.name)
         @result[:tweet_user_screen_name].must_equal(@tweet.user.screen_name)
-        @result[:keyword].must_equal(@keyword)
+        @result[:pickup_keyword_id].must_equal(@pickup_keyword.id)
       end
     end
   end
@@ -230,7 +230,7 @@ describe PickupTweet do
                       tweet_user_image_url: "tweet.user.profile_image_url",
                       tweet_user_name: "tweet.user.name",
                       tweet_user_screen_name: "tweet.user.screen_name",
-                      keyword: "keyword"
+                      pickup_keyword_id: 1
       }
     end
 
@@ -244,7 +244,7 @@ describe PickupTweet do
         @result.tweet_user_image_url.must_equal(@attributes[:tweet_user_image_url])
         @result.tweet_user_name.must_equal(@attributes[:tweet_user_name])
         @result.tweet_user_screen_name.must_equal(@attributes[:tweet_user_screen_name])
-        @result.keyword.must_equal(@attributes[:keyword])
+        @result.pickup_keyword_id.must_equal(@attributes[:pickup_keyword_id])
       end
     end
 
@@ -260,7 +260,7 @@ describe PickupTweet do
                                 tweet_user_image_url: "updated_tweet.user.profile_image_url",
                                 tweet_user_name: "updated_tweet.user.name",
                                 tweet_user_screen_name: "updated_tweet.user.screen_name",
-                                keyword: "updated_keyword"
+                                pickup_keyword_id: 2
         }
         PickupTweet.create_or_update(@updated_attributes)
         @result = PickupTweet.find_by(tweet_id: @attributes[:tweet_id])
@@ -275,7 +275,7 @@ describe PickupTweet do
         @result.tweet_user_image_url.must_equal(@updated_attributes[:tweet_user_image_url])
         @result.tweet_user_name.must_equal(@updated_attributes[:tweet_user_name])
         @result.tweet_user_screen_name.must_equal(@updated_attributes[:tweet_user_screen_name])
-        @result.keyword.must_equal(@updated_attributes[:keyword])
+        @result.pickup_keyword_id.must_equal(@updated_attributes[:pickup_keyword_id])
       end
     end
   end
