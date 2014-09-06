@@ -6,7 +6,7 @@ class PickupTweet < ActiveRecord::Base
 
   BOT_KEYWORDS = %w(bot ボット ぼっと)
 
-  MAX_RECORDS = 1000
+  MAX_RECORDS = 5000
 
   # TODO: isを取る
   def is_liked_by?(user)
@@ -24,11 +24,11 @@ class PickupTweet < ActiveRecord::Base
       consumer_secret: Rails.application.secrets.twitter_consumer_secret,
     }
     client = Twitter::REST::Client.new(twitter_config)
-    SEARCH_KEYWORDS.each do |keyword|
-      tweets = client.search(keyword)
+    PickupKeyword.all.each do |pickup_keyword|
+      tweets = client.search(pickup_keyword.pickup_keyword)
       tweets.each do |tweet|
         unless non_pickup_tweet?(tweet)
-          pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, keyword)
+          pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, pickup_keyword)
           PickupTweet.create_or_update(pickup_tweet_attrs)
         end
       end
