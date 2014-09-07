@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 20140902234650) do
   add_index "pickup_tweets", ["tweet_user_name"], name: "index_pickup_tweets_on_tweet_user_name"
 
   create_table "pickup_tweets_per_days", force: true do |t|
-    t.date     "target_date"
-    t.integer  "pickup_keyword_id"
-    t.integer  "total"
+    t.date     "target_date",                   null: false
+    t.integer  "pickup_keyword_id",             null: false
+    t.integer  "total",             default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
