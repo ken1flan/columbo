@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140824052833) do
+ActiveRecord::Schema.define(version: 20140902234650) do
 
   create_table "excluded_twitter_users", force: true do |t|
     t.string   "uid"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20140824052833) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
+  create_table "pickup_keywords", force: true do |t|
+    t.string   "pickup_keyword"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pickup_tweets", force: true do |t|
     t.text     "attrs"
     t.string   "tweet_id"
@@ -45,11 +52,23 @@ ActiveRecord::Schema.define(version: 20140824052833) do
     t.datetime "updated_at"
     t.string   "keyword"
     t.string   "tweet_user_uid"
+    t.integer  "pickup_keyword_id"
   end
 
+  add_index "pickup_tweets", ["pickup_keyword_id"], name: "index_pickup_tweets_on_pickup_keyword_id"
   add_index "pickup_tweets", ["tweet_at"], name: "index_pickup_tweets_on_tweet_at"
   add_index "pickup_tweets", ["tweet_id"], name: "index_pickup_tweets_on_tweet_id"
   add_index "pickup_tweets", ["tweet_user_name"], name: "index_pickup_tweets_on_tweet_user_name"
+
+  create_table "pickup_tweets_per_days", force: true do |t|
+    t.date     "target_date",                   null: false
+    t.integer  "pickup_keyword_id",             null: false
+    t.integer  "total",             default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pickup_tweets_per_days", ["pickup_keyword_id"], name: "index_pickup_tweets_per_days_on_pickup_keyword_id"
 
   create_table "rs_evaluations", force: true do |t|
     t.string   "reputation_name"

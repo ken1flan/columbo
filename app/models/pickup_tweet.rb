@@ -2,15 +2,11 @@ class PickupTweet < ActiveRecord::Base
   has_reputation :likes, source: :user, aggregated_by: :sum
 
   default_scope { order('tweet_at DESC') }
-  scope :can_display, ->{ where(truncated: false) }
-
-  SEARCH_KEYWORDS = [
-    "うちのカミさんが",
-  ]
+  scope :can_display, -> { where(truncated: false) }
 
   BOT_KEYWORDS = %w(bot ボット ぼっと)
 
-  MAX_RECORDS = 1000
+  MAX_RECORDS = 5000
 
   # TODO: isを取る
   def is_liked_by?(user)
@@ -28,11 +24,11 @@ class PickupTweet < ActiveRecord::Base
       consumer_secret: Rails.application.secrets.twitter_consumer_secret,
     }
     client = Twitter::REST::Client.new(twitter_config)
-    SEARCH_KEYWORDS.each do |keyword|
-      tweets = client.search(keyword)
+    PickupKeyword.all.each do |pickup_keyword|
+      tweets = client.search(pickup_keyword.pickup_keyword)
       tweets.each do |tweet|
         unless non_pickup_tweet?(tweet)
-          pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, keyword)
+          pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, pickup_keyword)
           PickupTweet.create_or_update(pickup_tweet_attrs)
         end
       end
@@ -55,7 +51,7 @@ class PickupTweet < ActiveRecord::Base
   end
 
   private
-    def self.get_attributes_from_tweet(tweet, keyword)
+    def self.get_attributes_from_tweet(tweet, pickup_keyword)
       { attrs: tweet.attrs.to_s,
         tweet_id: tweet.id,
         text: tweet.text,
@@ -65,7 +61,8 @@ class PickupTweet < ActiveRecord::Base
         tweet_user_uid: tweet.user.id,
         tweet_user_name: tweet.user.name,
         tweet_user_screen_name: tweet.user.screen_name,
-        keyword: keyword
+        keyword: pickup_keyword.pickup_keyword,
+        pickup_keyword_id: pickup_keyword.id
       }
     end
 

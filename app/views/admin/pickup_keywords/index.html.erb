@@ -1,0 +1,28 @@
+<h1>Listing pickup_keywords</h1>
+
+<%= link_to 'New Pickup keyword', new_admin_pickup_keyword_path, class: 'btn btn-warning', id: 'button_add_new' %>
+<br>
+<br>
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Pickup keyword</th>
+      <th>Slug</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pickup_keywords.each do |pickup_keyword| %>
+      <tr id="summary_<%= pickup_keyword.id %>">
+        <td><%= pickup_keyword.pickup_keyword %></td>
+        <td><%= pickup_keyword.slug %></td>
+        <td>
+          <%= link_to 'Show', admin_pickup_keyword_path(pickup_keyword), class: "btn btn-info", id: "button_show_#{pickup_keyword.id}" %>
+          <%= link_to 'Edit', edit_admin_pickup_keyword_path(pickup_keyword) , class: "btn btn-warning", id: "button_edit_#{pickup_keyword.id}" %>
+          <%= link_to 'Destroy', [:admin, pickup_keyword], method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger", id: "button_destroy_#{pickup_keyword.id}" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

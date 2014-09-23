@@ -1,0 +1,25 @@
+<%= form_for([:admin, @pickup_keyword]) do |f| %>
+  <% if @pickup_keyword.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pickup_keyword.errors.count, "error") %> prohibited this pickup_keyword from being saved:</h2>
+
+      <ul>
+      <% @pickup_keyword.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pickup_keyword %><br>
+    <%= f.text_field :pickup_keyword %>
+  </div>
+  <div class="field">
+    <%= f.label :slug %><br>
+    <%= f.text_field :slug %>
+  </div>
+  <div class="actions">
+    <%= f.submit class:'btn btn-warning', id: 'button_submit' %>
+  </div>
+<% end %>

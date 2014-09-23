@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pickup keyword:</strong>
+  <%= @pickup_keyword.pickup_keyword %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @pickup_keyword.slug %>
+</p>
+
+<%= link_to 'Edit', edit_admin_pickup_keyword_path(@pickup_keyword), class: 'btn btn-warning', id: 'button_edit' %> |
+<%= link_to 'Back', admin_pickup_keywords_path, class: 'btn btn-info' %>
