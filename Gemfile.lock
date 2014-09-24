@@ -35,6 +35,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     ansi (1.4.3)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
@@ -281,6 +284,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-reputation-system!
+  annotate
   better_errors
   cancancan (~> 1.9)
   capybara (= 2.2.1)
