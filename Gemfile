@@ -36,6 +36,7 @@ group :development do
   gem 'rails-footnotes', '>= 4.0.0', '<5'
   gem 'better_errors'
   gem 'letter_opener'
+  gem "annotate"            # テーブル定義を各種ファイルに貼り付ける
 end
 
 group :test do

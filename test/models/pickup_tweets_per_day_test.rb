@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: pickup_tweets_per_days
+#
+#  id                :integer          not null, primary key
+#  target_date       :date             not null
+#  pickup_keyword_id :integer          not null
+#  total             :integer          default(0), not null
+#  created_at        :datetime
+#  updated_at        :datetime
+#
+# Indexes
+#
+#  index_pickup_tweets_per_days_on_pickup_keyword_id  (pickup_keyword_id)
+#
+
 require "test_helper"
 
 describe PickupTweetsPerDay do

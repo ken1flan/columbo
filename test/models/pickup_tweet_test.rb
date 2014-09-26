@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: pickup_tweets
+#
+#  id                     :integer          not null, primary key
+#  attrs                  :text
+#  tweet_id               :string(255)
+#  text                   :string(255)
+#  truncated              :boolean
+#  tweet_at               :datetime
+#  tweet_user_image_url   :string(255)
+#  tweet_user_name        :string(255)
+#  tweet_user_screen_name :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  keyword                :string(255)
+#  tweet_user_uid         :string(255)
+#  pickup_keyword_id      :integer
+#
+# Indexes
+#
+#  index_pickup_tweets_on_pickup_keyword_id  (pickup_keyword_id)
+#  index_pickup_tweets_on_tweet_at           (tweet_at)
+#  index_pickup_tweets_on_tweet_id           (tweet_id)
+#  index_pickup_tweets_on_tweet_user_name    (tweet_user_name)
+#
+
 require "test_helper"
 
 describe PickupTweet do
