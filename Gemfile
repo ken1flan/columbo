@@ -43,7 +43,7 @@ group :test do
   gem 'minitest-spec-rails' # describeやitが使える
   gem 'minitest-matchers'   # いろいろなmatcher
   gem 'minitest-reporters'  # minitestの実行結果をキレイに見せる
-  gem 'capybara', '2.2.1'   # integration testでブラウザ上の操作を記述できるようにする
+  gem 'capybara'            # integration testでブラウザ上の操作を記述できるようにする
   gem 'poltergeist'         # capybaraのjsdriver。phantomjsを使う。
   gem 'database_cleaner'    # テスト時にdbのクリーンアップする方法を選択しやすくする。
   gem 'timecop'             # 時間を止めたり、変えたりする。
