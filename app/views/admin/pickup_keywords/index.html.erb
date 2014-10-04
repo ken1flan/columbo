@@ -1,4 +1,4 @@
-<h1>Listing pickup_keywords</h1>
+<legend>Listing pickup_keywords</legend>
 
 <%= link_to 'New Pickup keyword', new_admin_pickup_keyword_path, class: 'btn btn-warning', id: 'button_add_new' %>
 <br>
@@ -8,6 +8,7 @@
     <tr>
       <th>Pickup keyword</th>
       <th>Slug</th>
+      <th>Count</th>
       <th></th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
       <tr id="summary_<%= pickup_keyword.id %>">
         <td><%= pickup_keyword.pickup_keyword %></td>
         <td><%= pickup_keyword.slug %></td>
+        <td><%= pickup_keyword.tweet_count %></td>
         <td>
           <%= link_to 'Show', admin_pickup_keyword_path(pickup_keyword), class: "btn btn-info", id: "button_show_#{pickup_keyword.id}" %>
           <%= link_to 'Edit', edit_admin_pickup_keyword_path(pickup_keyword) , class: "btn btn-warning", id: "button_edit_#{pickup_keyword.id}" %>

@@ -10,4 +10,7 @@
 #
 
 class PickupKeyword < ActiveRecord::Base
+  def tweet_count
+    PickupTweet.where(pickup_keyword_id: id).count
+  end
 end
