@@ -7,8 +7,8 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    昨日(<%= @target_dates.first %>)は「<%= @best_of_yesterday.pickup_keyword %>」が一番でした。<br>
-    一週間(<%= @target_dates.last %>〜)では「<%= @best_of_weekly.pickup_keyword %>」が一番でした。<br>
+    昨日(<%= @target_dates.first %>)は「<%= PickupKeyword.best_of_yesterday.send(:pickup_keyword) %>」が一番でした。<br>
+    一週間(<%= @target_dates.last %>〜)では「<%=  PickupKeyword.best_of_last_week.send(:pickup_keyword) %>」が一番でした。<br>
   </div>
 </div>
 

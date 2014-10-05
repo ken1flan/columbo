@@ -15,4 +15,19 @@ class PickupKeyword < ActiveRecord::Base
   def tweet_count
     PickupTweet.where(pickup_keyword_id: id).count
   end
+
+  def self.best_of_yesterday
+    sums = PickupTweetsPerDay.
+      where(target_date: Date.yesterday).
+      group(:pickup_keyword_id).sum(:total)
+    find sums.sort_by{|i| i[1] }.reverse.first[0]
+  end
+
+  def self.best_of_last_week
+    sums = PickupTweetsPerDay.
+      where("target_date <= ?", Date.yesterday).
+      where("target_date >= ?", 8.days.ago.to_date).
+      group(:pickup_keyword_id).sum(:total)
+    find sums.sort_by{|i| i[1] }.reverse.first[0]
+  end
 end
