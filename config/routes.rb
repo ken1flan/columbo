@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     get 'pickup_tweets/:id/:up_down' => 'reputation#pickup_tweet'
   end
 
+  resource :pickup_tweets_per_day, only: [:show]
+
   # admin
   namespace :admin do
     get '/' => 'top#index'

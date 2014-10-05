@@ -15,6 +15,8 @@
 #
 
 class PickupTweetsPerDay < ActiveRecord::Base
+  belongs_to :pickup_keyword
+
   def self.take_statistics(pickup_keyword)
     today = Time.zone.now.to_date
     pickup_tweets_per_day = find_by(target_date: today, pickup_keyword_id: pickup_keyword.id)

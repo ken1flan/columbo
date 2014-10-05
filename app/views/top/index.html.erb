@@ -15,6 +15,23 @@
         </p>
       </div>
   </div>
+  <%
+      best_of_yesterday = PickupKeyword.best_of_yesterday
+      best_of_last_week = PickupKeyword.best_of_last_week
+  %>
+  <% if best_of_yesterday.present? && best_of_last_week.present? %>
+    <div class="item col-md-4 col-xs-12" style="padding: 3px;">
+        <div style="background-color: #F9F9F9; padding: 3px 15px;">
+          <h2>世の中の動向</h2>
+          <p>
+            昨日(<%= Date.yesterday %>)は「<%= best_of_yesterday.send(:pickup_keyword) %>」が一番でした。<br>
+            一週間(<%= 8.days.ago.to_date %>〜)では「<%=  best_of_last_week.send(:pickup_keyword) %>」が一番でした。<br>
+            <span class="pull-right"><%= link_to "詳細はこちら", pickup_tweets_per_day_path, class: "btn btn-default" %></span><br>
+            <br>
+          </p>
+        </div>
+    </div>
+  <% end %>
   <% @pickup_tweets.each do |pickup_tweet| %>
     <%= render 'shared/pickup_tweet', pickup_tweet: pickup_tweet %>
   <% end %>
