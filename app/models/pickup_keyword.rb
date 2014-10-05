@@ -10,6 +10,8 @@
 #
 
 class PickupKeyword < ActiveRecord::Base
+  has_many :pickup_tweets_per_days
+
   def tweet_count
     PickupTweet.where(pickup_keyword_id: id).count
   end

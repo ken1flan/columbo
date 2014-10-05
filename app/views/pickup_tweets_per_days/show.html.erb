@@ -1,0 +1,41 @@
+<%
+    title("キーワード別ツイート数 | Columbo")
+    description("世の中において、パートナーをどのように呼ぶか、厳選キーワードで統計を出します(w ")
+%>
+
+<h1>日別ツイート数</h1>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    昨日(<%= @target_dates.first %>)は「<%= @best_of_yesterday.pickup_keyword %>」が一番でした。<br>
+    一週間(<%= @target_dates.last %>〜)では「<%= @best_of_weekly.pickup_keyword %>」が一番でした。<br>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>日付</td>
+      <% @pickup_keywords.each do |k| %>
+        <td><%= k.pickup_keyword %></td>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @target_dates.each do |target_date| %>
+      <tr>
+        <td><%= target_date %></td>
+        <% @pickup_keywords.each do |pickup_keyword| %>
+          <%
+            pickup_tweets_per_day = @pickup_tweets_per_days.select {|p| p.pickup_keyword_id == pickup_keyword.id && p.target_date == target_date }.first
+          %>
+          <% if pickup_tweets_per_day.present? %>
+            <td><%= pickup_tweets_per_day.total %></td>
+          <% else %>
+            <td> - </td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
