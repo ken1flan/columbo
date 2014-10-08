@@ -16,7 +16,6 @@ class PickupKeyword < ActiveRecord::Base
     PickupTweet.where(pickup_keyword_id: id).count
   end
 
-  # TODO: テスト！
   def self.best_of_yesterday
     sums = PickupTweetsPerDay.
       where(target_date: Date.yesterday).
@@ -28,6 +27,7 @@ class PickupKeyword < ActiveRecord::Base
     end
   end
 
+  # TODO: テスト！
   def self.best_of_last_week
     sums = PickupTweetsPerDay.
       where("target_date <= ?", Date.yesterday).
