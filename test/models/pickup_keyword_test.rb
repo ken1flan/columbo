@@ -51,6 +51,51 @@ describe PickupKeyword do
         pickup_keyword.tweet_count.must_equal 0
       end
     end
+  end
 
+  describe ".best_of_yesterday" do
+    before do
+      Timecop.freeze
+      @pickup_keyword = create(:pickup_keyword)
+      @another_pickup_keyword = create(:pickup_keyword)
+      @today = Date.today
+      @yesterday = Date.yesterday
+      @day_before_yesterday = 2.days.ago.to_date
+    end
+    after { Timecop.return }
+
+    context "昨日の統計データがないとき" do
+      before do
+        create(:pickup_tweets_per_day, target_date: @today, pickup_keyword_id: @pickup_keyword.id)
+        create(:pickup_tweets_per_day, target_date: @today, pickup_keyword_id: @another_pickup_keyword.id)
+        create(:pickup_tweets_per_day, target_date: @day_before_yesterday, pickup_keyword_id: @pickup_keyword.id)
+        create(:pickup_tweets_per_day, target_date: @day_before_yesterday, pickup_keyword_id: @another_pickup_keyword.id)
+      end
+
+      it "nilであること" do
+        PickupKeyword.best_of_yesterday.must_equal nil
+      end
+    end
+
+    context "昨日のpickup_tweets_per_dayが1件のとき" do
+      before do
+        create(:pickup_tweets_per_day, target_date: @yesterday, pickup_keyword_id: @pickup_keyword.id, total: 2)
+      end
+
+      it "そのpickup_keywordであること" do
+        PickupKeyword.best_of_yesterday.id.must_equal @pickup_keyword.id
+      end
+    end
+
+    context "昨日のpickup_tweets_per_dayが2件のとき" do
+      before do
+        create(:pickup_tweets_per_day, target_date: @yesterday, pickup_keyword_id: @pickup_keyword.id, total: 2)
+        create(:pickup_tweets_per_day, target_date: @yesterday, pickup_keyword_id: @another_pickup_keyword.id, total: 1)
+      end
+
+      it "totalの値が大きい方のpickup_keywordであること" do
+        PickupKeyword.best_of_yesterday.id.must_equal @pickup_keyword.id
+      end
+    end
   end
 end
