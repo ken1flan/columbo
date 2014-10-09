@@ -11,6 +11,7 @@
         </span>
       </div>
       <div class="media">
+        <span class="pull-right" style="color: gray; "><%= pickup_tweet.tweet_at.to_date %></span><br>
         <%= emphasize_keyword(pickup_tweet.text, pickup_tweet.keyword) %>
         <span class="pull-right">
           <button id="like_pickup_tweet_<%= pickup_tweet.id %>" type="button" class="likePickupTweet btn btn-default">
