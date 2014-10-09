@@ -52,7 +52,7 @@ class PickupTweet < ActiveRecord::Base
     }
     client = Twitter::REST::Client.new(twitter_config)
     PickupKeyword.all.each do |pickup_keyword|
-      tweets = client.search(pickup_keyword.pickup_keyword + "since:#{1.day.ago}")
+      tweets = client.search(pickup_keyword.pickup_keyword + "since:#{Date.today}")
       tweets.each do |tweet|
         unless non_pickup_tweet?(tweet)
           pickup_tweet_attrs = PickupTweet.get_attributes_from_tweet(tweet, pickup_keyword)
