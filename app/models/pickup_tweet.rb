@@ -33,7 +33,7 @@ class PickupTweet < ActiveRecord::Base
 
   BOT_KEYWORDS = %w(bot ボット ぼっと)
 
-  MAX_RECORDS = 5000
+  MAX_RECORDS = 2000
 
   # TODO: isを取る
   def is_liked_by?(user)
