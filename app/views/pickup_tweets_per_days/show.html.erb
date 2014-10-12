@@ -12,23 +12,14 @@
   </div>
 </div>
 
-<%
-%>
-<%= pie_chart [["Football", 10], ["Basketball", 5]] %>
-<%
-    data = [
-      {name: "hoge", data:[
-        ['2014/10/10', 12],
-        ['2014/10/11', 11],
-        ['2014/10/12', 13],
-        ['2014/10/13', 13],
-        ['2014/10/14', 13],
-        ['2014/10/15', 13],
-        ['2014/10/16', 13],
-      ]}
-    ]
-%>
-<%= line_chart data %>
+<%= line_chart PickupKeyword.date_and_totals_of_last_week %>
+
+昨日のキーワード割合
+<%= pie_chart PickupKeyword.totals_of_yesterday %>
+
+先週のキーワード割合
+<%= pie_chart PickupKeyword.totals_of_last_week %>
+
 
 <table class="table">
   <thead>

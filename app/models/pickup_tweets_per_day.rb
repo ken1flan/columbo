@@ -16,7 +16,12 @@
 
 class PickupTweetsPerDay < ActiveRecord::Base
   belongs_to :pickup_keyword
-
+  scope :yesterday, -> { where(target_date: Date.yesterday) }
+  scope :last_week, -> {
+    where("target_date <= ?", Date.yesterday).
+    where("target_date >= ?", 8.days.ago.to_date)
+  }
+ 
   def self.take_statistics(pickup_keyword)
     today = Time.zone.now.to_date
     pickup_tweets_per_day = find_by(target_date: today, pickup_keyword_id: pickup_keyword.id)
