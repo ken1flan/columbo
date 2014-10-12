@@ -61,9 +61,8 @@ class PickupKeyword < ActiveRecord::Base
         where(pickup_keyword_id: k.id).
         last_week.
         select("target_date, total")
-      data = []
-      records.each do |record|
-        data.push [record.target_date, record.total]
+      data = records.map do |record|
+        [record.target_date, record.total]
       end
       { name: k.pickup_keyword, data: data }
     end
