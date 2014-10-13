@@ -32,6 +32,8 @@ gem 'cancancan', '~> 1.9'
 # いいね
 gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4'
 
+gem "chartkick"             # グラフ
+
 group :development do
   gem 'rails-footnotes', '>= 4.0.0', '<5'
   gem 'better_errors'

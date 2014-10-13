@@ -27,7 +27,6 @@ class PickupKeyword < ActiveRecord::Base
     end
   end
 
-  # TODO: テスト！
   def self.best_of_last_week
     sums = PickupTweetsPerDay.
       where("target_date <= ?", Date.yesterday).
@@ -37,6 +36,35 @@ class PickupKeyword < ActiveRecord::Base
       find sums.sort_by{ |i| i[1] }.reverse.first[0]
     else
       nil
+    end
+  end
+
+  def self.totals_of_yesterday
+    PickupTweetsPerDay.
+      yesterday.
+      group("pickup_keywords.pickup_keyword").
+      joins(:pickup_keyword).
+      sum(:total)
+  end
+
+  def self.totals_of_last_week
+    PickupTweetsPerDay.
+      last_week.
+      group("pickup_keywords.pickup_keyword").
+      joins(:pickup_keyword).
+      sum(:total)
+  end
+
+  def self.date_and_totals_of_last_week
+    PickupKeyword.all.map do |k|
+      records = PickupTweetsPerDay.
+        where(pickup_keyword_id: k.id).
+        last_week.
+        select("target_date, total")
+      data = records.map do |record|
+        [record.target_date, record.total]
+      end
+      { name: k.pickup_keyword, data: data }
     end
   end
 end
