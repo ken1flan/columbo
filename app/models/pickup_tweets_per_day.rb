@@ -19,7 +19,7 @@ class PickupTweetsPerDay < ActiveRecord::Base
   scope :yesterday, -> { where(target_date: Date.yesterday) }
   scope :last_week, -> {
     where("target_date <= ?", Date.yesterday).
-    where("target_date >= ?", 8.days.ago.to_date)
+    where("target_date >= ?", 7.days.ago.to_date)
   }
  
   def self.take_statistics(pickup_keyword)
