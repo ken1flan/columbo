@@ -3,48 +3,91 @@
     description("世の中において、パートナーをどのように呼ぶか、厳選キーワードで統計を出します(w ")
 %>
 
-<h1>日別ツイート数</h1>
+<div class="page-header">
+  <h1><%= @pickup_keywords.map {|k| k.pickup_keyword }.join('、') %>のつぶやかれ具合</h1>
+</div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-    昨日(<%= @target_dates.first %>)は「<%= PickupKeyword.best_of_yesterday.send(:pickup_keyword) %>」が一番でした。<br>
-    一週間(<%= @target_dates.last %>〜)では「<%=  PickupKeyword.best_of_last_week.send(:pickup_keyword) %>」が一番でした。<br>
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">
+        だいたいのところ
+      </div>
+    </div>
+    <div class="panel-body">
+      昨日(<%= @target_dates.first %>)は「<%= PickupKeyword.best_of_yesterday.send(:pickup_keyword) %>」が一番でした。<br>
+      一週間(<%= @target_dates.last %>〜)では「<%=  PickupKeyword.best_of_last_week.send(:pickup_keyword) %>」が一番でした。<br>
+    </div>
   </div>
 </div>
 
-<%= line_chart PickupKeyword.date_and_totals_of_last_week %>
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">昨日までのつぶやき数</div>
+    </div>
+    <div class="panel-body">
+      <%= line_chart PickupKeyword.date_and_totals_of_last_week %>
+    </div>
+  </div>
+</div>
 
-昨日のキーワード割合
-<%= pie_chart PickupKeyword.totals_of_yesterday %>
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">昨日の割合</div>
+    </div>
+    <div class="panel-body">
+      <%= pie_chart PickupKeyword.totals_of_yesterday %>
+    </div>
+  </div>
+</div>
 
-先週のキーワード割合
-<%= pie_chart PickupKeyword.totals_of_last_week %>
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">先週の割合</div>
+    </div>
+    <div class="panel-body">
+      <%= pie_chart PickupKeyword.totals_of_last_week %>
+    </div>
+  </div>
+</div>
 
-
-<table class="table">
-  <thead>
-    <tr>
-      <td>日付</td>
-      <% @pickup_keywords.each do |k| %>
-        <td><%= k.pickup_keyword %></td>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @target_dates.each do |target_date| %>
-      <tr>
-        <td><%= target_date %></td>
-        <% @pickup_keywords.each do |pickup_keyword| %>
-          <%
-            pickup_tweets_per_day = @pickup_tweets_per_days.select {|p| p.pickup_keyword_id == pickup_keyword.id && p.target_date == target_date }.first
-          %>
-          <% if pickup_tweets_per_day.present? %>
-            <td><%= pickup_tweets_per_day.total %></td>
-          <% else %>
-            <td> - </td>
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">
+        表で書いてみると…
+      </div>
+    </div>
+    <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <td>日付</td>
+          <% @pickup_keywords.each do |k| %>
+            <td><%= k.pickup_keyword %></td>
           <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @target_dates.each do |target_date| %>
+          <tr>
+            <td><%= target_date %></td>
+            <% @pickup_keywords.each do |pickup_keyword| %>
+              <%
+                pickup_tweets_per_day = @pickup_tweets_per_days.select {|p| p.pickup_keyword_id == pickup_keyword.id && p.target_date == target_date }.first
+              %>
+              <% if pickup_tweets_per_day.present? %>
+                <td><%= pickup_tweets_per_day.total %></td>
+              <% else %>
+                <td> - </td>
+              <% end %>
+            <% end %>
+          </tr>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>
