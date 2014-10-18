@@ -166,6 +166,9 @@ describe PickupTweet do
       before do
         create_list(:pickup_tweet, PickupTweet::MAX_RECORDS)
         @oldest = create(:pickup_tweet, tweet_at: 100.years.ago)
+        user = create(:user)
+        @oldest.add_or_update_evaluation(:likes, 1, user)
+        @oldest_reputations = @oldest.reputations
         PickupTweet.housekeep
       end
 
@@ -174,7 +177,12 @@ describe PickupTweet do
       end
 
       it "一番前につぶやかれたレコードが削除されていること" do
-        proc { PickupTweet.find(@oldest.id) }.must_raise(ActiveRecord::RecordNotFound)
+        proc { PickupTweet.find(@oldest.id) }.
+          must_raise(ActiveRecord::RecordNotFound)
+        @oldest_reputations.each do |r|
+          proc { ReputationSystem::Reputation.find(r.id) }.
+            must_raise(ActiveRecord::RecordNotFound)
+        end
       end
     end
   end
