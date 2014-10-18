@@ -39,6 +39,7 @@ group :development do
   gem 'better_errors'
   gem 'letter_opener'
   gem "annotate"            # テーブル定義を各種ファイルに貼り付ける
+  gem "squasher"            # migrationファイルの圧縮
 end
 
 group :test do
