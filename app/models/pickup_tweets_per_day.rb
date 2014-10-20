@@ -15,6 +15,8 @@
 #
 
 class PickupTweetsPerDay < ActiveRecord::Base
+  MAX_DAYS = 365
+
   belongs_to :pickup_keyword
   scope :yesterday, -> { where(target_date: Date.yesterday) }
   scope :last_week, -> {
@@ -55,5 +57,9 @@ class PickupTweetsPerDay < ActiveRecord::Base
       where("tweet_at > ?", self.updated_at).
       where("tweet_at < ?", self.target_date + 1.day)
     self.update_attributes(total: self.total + pickup_tweets.count)
+  end
+
+  def self.housekeep
+    # TODO: 処理を書く
   end
 end
