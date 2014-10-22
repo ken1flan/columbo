@@ -5,4 +5,9 @@ namespace :statistics do
       PickupTweetsPerDay.take_statistics(pickup_keyword)
     end
   end
+
+  desc "キーワード別ピックアップツイート数をハウスキープする"
+  task :housekeep => :environment do
+    PickupTweetsPerDay.housekeep
+  end
 end

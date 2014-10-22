@@ -266,6 +266,41 @@ describe PickupTweetsPerDay do
     end
   end
 
+  describe ".housekeep" do
+    max_days = PickupTweetsPerDay::MAX_DAYS
+    before do
+      Timecop.freeze
+    end
+
+    after do
+      Timecop.return
+    end
+
+    context "#{max_days + 1}日前のものが登録されているとき" do
+      before do
+        @pickup_tweets_per_day =
+          create(:pickup_tweets_per_day, target_date: (max_days + 1).days.ago.to_date)
+      end
+
+      it "削除されていること" do
+        PickupTweetsPerDay.housekeep
+        proc { PickupTweetsPerDay.find(@pickup_tweets_per_day.id) }.
+          must_raise(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    context "#{max_days}日前のものが登録されているとき" do
+      before do
+        @pickup_tweets_per_day = create(:pickup_tweets_per_day, target_date: max_days.days.ago.to_date)
+      end
+
+      it "削除されないこと" do
+        PickupTweetsPerDay.housekeep
+        PickupTweetsPerDay.find(@pickup_tweets_per_day.id).present?.must_equal true
+      end
+    end
+  end
+
   def check_value(day, pickup_keyword, expected_value)
     statistic_count = PickupTweetsPerDay.where(target_date: day, pickup_keyword_id: pickup_keyword.id).count
     statistic_count.must_equal 1

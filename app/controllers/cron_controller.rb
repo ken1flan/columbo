@@ -12,5 +12,9 @@ class CronController < ApplicationController
       PickupTweetsPerDay.take_statistics(pickup_keyword)
     end
   end
+
+  def housekeep_pickup_tweets_per_day
+    PickupTweetsPerDay.housekeep
+  end
 end
 
