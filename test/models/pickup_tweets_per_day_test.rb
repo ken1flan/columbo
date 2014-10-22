@@ -279,10 +279,11 @@ describe PickupTweetsPerDay do
     context "#{max_days + 1}日前のものが登録されているとき" do
       before do
         @pickup_tweets_per_day =
-          create(:pickup_tweets_per_day, target_date: max_days.ago.to_date)
+          create(:pickup_tweets_per_day, target_date: (max_days + 1).days.ago.to_date)
       end
 
       it "削除されていること" do
+        PickupTweetsPerDay.housekeep
         proc { PickupTweetsPerDay.find(@pickup_tweets_per_day.id) }.
           must_raise(ActiveRecord::RecordNotFound)
       end
@@ -290,10 +291,11 @@ describe PickupTweetsPerDay do
 
     context "#{max_days}日前のものが登録されているとき" do
       before do
-        @pickup_tweets_per_day = create(:pickup_tweets_per_day, target_date: max_days.ago.to_date)
+        @pickup_tweets_per_day = create(:pickup_tweets_per_day, target_date: max_days.days.ago.to_date)
       end
 
       it "削除されないこと" do
+        PickupTweetsPerDay.housekeep
         PickupTweetsPerDay.find(@pickup_tweets_per_day.id).present?.must_equal true
       end
     end

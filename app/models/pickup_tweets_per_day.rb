@@ -60,6 +60,7 @@ class PickupTweetsPerDay < ActiveRecord::Base
   end
 
   def self.housekeep
-    # TODO: 処理を書く
+    where("target_date < ?", MAX_DAYS.days.ago.to_date).
+      destroy_all
   end
 end
